@@ -1,0 +1,178 @@
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* ヘッダー */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.logo { font-weight: bold; }
+.nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #333;
+}
+.header-buttons button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+}
+.header-buttons .primary {
+  background: #333;
+  color: white;
+}
+
+/* メインビジュアル */
+.main-visual {
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
+  color: white;
+  padding: 8rem 2rem;
+  text-align: center;
+}
+
+/* サービス特徴 */
+.features {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.feature-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.feature-item {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 200px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* おすすめの体験 */
+.recommendations {
+  background: #f9f9f9;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.event-card {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.event-card:hover { transform: translateY(-5px); }
+.event-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+.event-card .content { padding: 1rem; }
+.event-card h3 { margin: 0 0 0.5rem; }
+.event-card p { margin: 0; font-size: 0.9rem; color: #555; }
+
+/* モーダル */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  padding-top: 100px;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background: white;
+  margin: auto;
+  padding: 20px;
+  border-radius: 1rem;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+}
+.modal-content img {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.close {
+  float: right;
+  font-size: 1.5rem;
+  color: #aaa;
+  cursor: pointer;
+}
+.close:hover { color: black; }
+
+/* お客様の声 */
+.voices {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.voice-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.voice-item {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* CTA */
+.cta {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.cta-button {
+  background: #ffb347;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* フッター */
+.footer {
+  background: #222;
+  color: white;
+  padding: 2rem;
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.footer-menu div { margin-right: 2rem; }
+.footer-menu ul { list-style: none; padding: 0; }
+.footer-menu a { color: #ffb347; text-decoration: none; }
+.copyright {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.8rem;
+}
