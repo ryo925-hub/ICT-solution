@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問い合わせチャット</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #e5ddd5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 400px;
+            height: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .chat-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto; /* メッセージが増えたらスクロールできるようにする */
+            background-color: #f7f7f7;
+        }
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.7rem 1rem;
+            border-radius: 18px;
+            max-width: 70%;
+            word-wrap: break-word; /* 長い文章を折り返す */
+        }
+        .user-message {
+            background-color: #dcf8c6;
+            margin-left: auto; /* 自分のメッセージを右寄せ */
+            border-bottom-right-radius: 4px;
+        }
+        .hq-message {
+            background-color: #e9e9eb;
+            margin-right: auto; /* 相手のメッセージを左寄せ */
+            border-bottom-left-radius: 4px;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 0.5rem;
+            border-top: 1px solid #ddd;
+        }
+        #messageInput {
+            flex-grow: 1;
+            padding: 0.7rem;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 0.5rem;
+        }
+        #sendButton {
+            padding: 0.7rem 1.2rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        #sendButton:hover {
+            background-color: #0056b3;
+        }
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-wrapper">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>本社 問い合わせ窓口</h2>
+            </div>
+            <div class="chat-messages" id="messagesContainer">
+                <div class="message hq-message">
+                    こんにちは！イベントや商品について、お気軽にご質問ください。
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="messageInput" placeholder="メッセージを入力...">
+                <button id="sendButton">送信</button>
+            </div>
+        </div>
+        <a href="index.html" class="back-button">ホーム画面に戻る</a>
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('messagesContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // 送信ボタンが押された時の処理
+        sendButton.addEventListener('click', sendMessage);
+
+        // Enterキーが押された時の処理
+        messageInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const text = messageInput.value.trim(); // 入力された文字を取得し、前後の空白を消す
+
+            if (text === '') {
+                return; // 何も入力されていなければ何もしない
+            }
+
+            // 自分のメッセージを画面に追加
+            addMessage(text, 'user');
+
+            // 入力欄を空にする
+            messageInput.value = '';
+
+            // 本社からの返信をシミュレーションする
+            simulateHQResponse();
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender === 'user' ? 'user-message' : 'hq-message');
+            messageDiv.textContent = text;
+            
+            messagesContainer.appendChild(messageDiv);
+
+            // 自動で一番下までスクロールする
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function simulateHQResponse() {
+            // 1秒後に返信するなど、少し遅延させるとリアルに見える
+            setTimeout(function() {
+                addMessage('お問い合わせありがとうございます。確認しますので、少々お待ちください。', 'hq');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
