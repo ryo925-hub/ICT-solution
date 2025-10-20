@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ</title>
+    <style>
+        /* ご提示いただいたUIのCSSをそのまま使用 */
+        body {
+            font-family: sans-serif;
+            margin: 2em;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c5a3b;
+            border-bottom: 2px solid #2c5a3b;
+            padding-bottom: 0.5em;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            margin-top: 2em;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .nav-container {
+            margin-top: 2em;
+            text-align: center;
+        }
+        .nav-link {
+            display: inline-block;
+            margin: 0.5em;
+            padding: 0.8em 1.5em;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            min-width: 200px;
+        }
+        .nav-link:hover {
+            background-color: #45a049;
+        }
+        .logout-link {
+            background-color: #f44336; /* ログアウトは赤色に */
+        }
+        .logout-link:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="mypage-title">マイページ</h1>
+        <p>ようこそ！ここから各機能へアクセスできます。</p>
+        
+        <div class="nav-container">
+            <a href="admin.html" class="nav-link">自分の投稿を管理する</a>
+            <a href="index.html" class="nav-link">新しい情報を登録する</a>
+            <a href="read.html" class="nav-link">みんなの投稿を見る</a>
+            <a href="#" id="logout-link" class="nav-link logout-link">ログアウト</a>
+        </div>
+    </div>
+
+        <!--
+    ----------------------------------
+    この下でデータベースからユーザIDの取得
+    ----------------------------------
+    -->
+
+
+    <!--<script>
+        window.addEventListener('DOMContentLoaded', function() {
+            // ログインしているユーザーIDを取得
+            const loggedInUser = sessionStorage.getItem('loggedInUser');
+            
+            // ログインしていない場合は、ログインページに強制的に移動
+            if (!loggedInUser) {
+                alert('ログインしていません。ログインページに戻ります。');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // ページのタイトルにユーザー名を表示
+            document.getElementById('mypage-title').textContent = loggedInUser + 'さんのマイページ';
+
+            // ログアウト処理
+            document.getElementById('logout-link').addEventListener('click', function(event) {
+                event.preventDefault(); // リンクのデフォルト動作を停止
+                if (confirm('ログアウトしますか？')) {
+                    sessionStorage.removeItem('loggedInUser');
+                    alert('ログアウトしました。');
+                    window.location.href = 'login.html';
+                }
+            });
+        });
+    </script>-->
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            // ページのタイトルにユーザー名を表示
+            document.getElementById('mypage-title').textContent = '未完成さんのマイページ';
+
+        });
+    </script>
+</body>
+</html>
