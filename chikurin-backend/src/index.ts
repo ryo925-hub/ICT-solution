@@ -2,6 +2,7 @@ import * as path from "path";
 import { HttpServer, WsServer } from "tsrpc";
 import { serviceProto } from "./shared/protocols/serviceProto";
 import { log } from "console";
+import { Global } from "./Global";
 
 // Create the Server
 const server = new HttpServer(serviceProto, {
@@ -21,12 +22,18 @@ async function init() {
 
     // TODO
     // Prepare something... (e.g. connect the db)
+    await Global.initDb()
+    /* const users = await Global.collection('users').find({}).toArray();
+    users.forEach(async user =>{
+        console.log(user);
+    }) */
+
     wsServer.listenMsg('Chat', async ctx => {
         console.log(ctx.msg.content);
         wsServer.broadcastMsg('Chat', {
             content: 'Hello, World!'
         })
-        
+
         wsServer.broadcastMsg('Test', {
             name: 'Test',
             age: 19,

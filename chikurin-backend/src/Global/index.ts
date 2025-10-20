@@ -18,12 +18,12 @@ export class Global {
             uri = `mongodb://${conf.admin}:${conf.password}@${conf.url}:${conf.port}/Zireael?authSource=admin`
         }
         else {
-            uri = 'mongodb://localhost:27017/Zireael'
+            uri = 'mongodb://root:herobrine@127.0.0.1:27017/Chikurin?authSource=admin'
         }
         try {
             // console.log(uri);
             const client = await new MongoClient(uri).connect();
-            console.log(`connected to ${conf.url}`);
+            console.log(`connected to ${uri}`);
             this.db = client.db();
 
         } catch (error) {

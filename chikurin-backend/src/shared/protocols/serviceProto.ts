@@ -1,4 +1,6 @@
 import { ServiceProto } from 'tsrpc-proto';
+import { ReqLogin, ResLogin } from './Login/PtlLogin';
+import { ReqRegist, ResRegist } from './Login/PtlRegist';
 import { MsgChat } from './MsgChat';
 import { MsgTest } from './MsgTest';
 import { ReqAddData, ResAddData } from './PtlAddData';
@@ -6,6 +8,14 @@ import { ReqGetData, ResGetData } from './PtlGetData';
 
 export interface ServiceType {
     api: {
+        "Login/Login": {
+            req: ReqLogin,
+            res: ResLogin
+        },
+        "Login/Regist": {
+            req: ReqRegist,
+            res: ResRegist
+        },
         "AddData": {
             req: ReqAddData,
             res: ResAddData
@@ -22,8 +32,20 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 3,
+    "version": 4,
     "services": [
+        {
+            "id": 4,
+            "name": "Login/Login",
+            "type": "api",
+            "conf": {}
+        },
+        {
+            "id": 5,
+            "name": "Login/Regist",
+            "type": "api",
+            "conf": {}
+        },
         {
             "id": 2,
             "name": "Chat",
@@ -46,6 +68,209 @@ export const serviceProto: ServiceProto<ServiceType> = {
         }
     ],
     "types": {
+        "Login/PtlLogin/ReqLogin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "loginID",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "base/BaseRequest": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "__token",
+                    "type": {
+                        "type": "String"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "Login/PtlLogin/ResLogin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "user",
+                    "type": {
+                        "type": "Reference",
+                        "target": "../entities/user/users"
+                    }
+                }
+            ]
+        },
+        "base/BaseResponse": {
+            "type": "Interface"
+        },
+        "../entities/user/users": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "_id",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "firstName1",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "lastName1",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "firstName2",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "lastName2",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "birthday",
+                    "type": {
+                        "type": "Date"
+                    }
+                },
+                {
+                    "id": 6,
+                    "name": "mailAddress",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 7,
+                    "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "Login/PtlRegist/ReqRegist": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "firstName1",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "lastName1",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "firstName2",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "lastName2",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "birthday",
+                    "type": {
+                        "type": "Date"
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "mailAddress",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 6,
+                    "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "Login/PtlRegist/ResRegist": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
         "MsgChat/MsgChat": {
             "type": "Interface",
             "properties": [
@@ -125,10 +350,28 @@ export const serviceProto: ServiceProto<ServiceType> = {
             ]
         },
         "PtlGetData/ReqGetData": {
-            "type": "Interface"
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
         },
         "PtlGetData/ResGetData": {
             "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
             "properties": [
                 {
                     "id": 0,
