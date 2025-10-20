@@ -8,6 +8,7 @@ export interface ReqLogin extends BaseRequest {
 
 export interface ResLogin extends BaseResponse {
     user: users
+    token: string
 }
 
 export const conf: BaseConf = {

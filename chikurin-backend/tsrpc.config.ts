@@ -16,7 +16,7 @@ export default <TsrpcConfig>{
     sync: [
         {
             from: 'src/shared',
-            to: '../chikurin-frontend/src/shared',
+            to: '../utils/src/shared',
             type: 'copy'     // Change this to 'copy' if your environment not support symlink  symlink
         }
     ],

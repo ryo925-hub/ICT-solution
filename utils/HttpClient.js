@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import getPreset from './config.js';
+import getPreset from './src/utils/config.js';
 const preset = getPreset();
 const createHttpClient = (presetType) => {
     console.log(axios);
@@ -32,10 +32,6 @@ const createHttpClient = (presetType) => {
                 }
             }
             catch (err) {
-                // resolve({
-                //     isSucc: false,
-                //     err
-                // })
                 resolve({
                     isSucc: false,
                     err

@@ -1,3 +1,4 @@
+//@ts-ignore
 import { ServiceProto } from 'tsrpc-proto';
 import { ReqLogin, ResLogin } from './Login/PtlLogin';
 import { ReqRegist, ResRegist } from './Login/PtlRegist';
@@ -32,7 +33,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 4,
+    "version": 5,
     "services": [
         {
             "id": 4,
@@ -127,6 +128,13 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     "type": {
                         "type": "Reference",
                         "target": "../entities/user/users"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "token",
+                    "type": {
+                        "type": "String"
                     }
                 }
             ]
