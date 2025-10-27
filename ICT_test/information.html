@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人情報修正</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+            background-color: #f0f2f5;
+        }
+        .register-container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            /* ★★★ 横幅を元のサイズに戻す ★★★ */
+            width: 400px; 
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .name-group {
+            display: flex;
+            gap: 1rem;
+        }
+        .name-group > div {
+            flex: 1;
+        }
+        .gender-group {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .gender-group label {
+            font-weight: normal;
+        }
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #007bff; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .login-link {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ★★★ ページ移動ボタン用のCSSを追加 (mypage.htmlからコピー) ★★★ */
+        .nav-container {
+            margin-top: 2em;
+            text-align: center;
+            border-top: 1px solid #eee; /* 区切り線 */
+            padding-top: 1.5em;
+        }
+        .nav-link {
+            display: block; /* ボタンを縦に並べる */
+            margin: 0.8em 0; /* 上下の間隔 */
+            padding: 0.8em 1.5em;
+            background-color: #4CAF50; /* 緑色 */
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .nav-link:hover {
+            background-color: #45a049;
+        }
+        .bamboo-link {
+            background-color: #5a9c78; /* 竹林は少し違う緑に */
+        }
+        .bamboo-link:hover {
+            background-color: #4a8364;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>個人情報修正</h2>
+
+        <div class="input-group name-group">
+            <div>
+                <label for="lastName">名前（姓）</label>
+                <input type="text" id="lastName" placeholder="山田">
+            </div>
+            <div>
+                <label for="firstName">名前（名）</label>
+                <input type="text" id="firstName" placeholder="太郎">
+            </div>
+        </div>
+        <div class="input-group name-group">
+            <div>
+                <label for="lastNameKana">名前（セイ）</label>
+                <input type="text" id="lastNameKana" placeholder="ヤマダ">
+            </div>
+            <div>
+                <label for="firstNameKana">名前（メイ）</label>
+                <input type="text" id="firstNameKana" placeholder="タロウ">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>性別</label>
+            <div class="gender-group">
+                </div>
+        </div>
+        <div class="input-group">
+            <label for="birthdate">生年月日</label>
+            <input type="date" id="birthdate">
+        </div>
+        <div class="input-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" placeholder="example@email.com">
+        </div>
+        <div class="input-group">
+            <label for="password">パスワード（変更する場合のみ入力）</label>
+            <input type="password" id="password" placeholder="変更する場合のみ入力">
+        </div>
+
+        <button onclick="updateInfo()">個人情報を更新する</button>
+
+        <div class="nav-container">
+            <a href="EC-regist/payment.html" class="nav-link">決済方法を登録・修正する</a>
+            <a href="bamboo.html" class="nav-link bamboo-link">竹林情報を登録・修正する</a>
+        </div>
+
+        <div class="login-link">
+            <a href="mypage.html">マイページに戻る</a>
+        </div>
+    </div>
+
+    <script>
+        function updateInfo() {
+            // ★★★ アラートのメッセージを戻す ★★★
+            alert('個人情報を更新しました！（このメッセージはシミュレーションです）');
+            // window.location.href = 'mypage.html'; // 更新後にマイページに戻る場合はコメントを外す
+        }
+    </script>
+
+</body>
+</html>
