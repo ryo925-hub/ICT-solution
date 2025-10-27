@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規会員登録</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* コンテンツが少なくても中央に配置 */
+            padding: 2rem 0;
+            background-color: #f0f2f5;
+        }
+        .register-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .name-group {
+            display: flex; /* 姓と名を横並びにする */
+            gap: 1rem; /* 姓と名の間隔 */
+        }
+        .name-group > div {
+            flex: 1; /* 姓と名の入力欄の幅を均等にする */
+        }
+        .gender-group {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .gender-group label {
+            font-weight: normal; /* ラジオボタンのラベルは太字にしない */
+        }
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #28a745; /* 登録ボタンは緑色に */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .login-link {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>新規会員登録</h2>
+
+        <div class="input-group name-group">
+            <div>
+                <label for="lastNameKana">名前（セイ）</label>
+                <input type="text" id="lastNameKana" placeholder="ヤマダ">
+            </div>
+            <div>
+                <label for="firstNameKana">名前（メイ）</label>
+                <input type="text" id="firstNameKana" placeholder="タロウ">
+            </div>
+        </div>
+
+        <div class="input-group name-group">
+            <div>
+                <label for="lastName">名前（姓）</label>
+                <input type="text" id="lastName" placeholder="山田">
+            </div>
+            <div>
+                <label for="firstName">名前（名）</label>
+                <input type="text" id="firstName" placeholder="太郎">
+            </div>
+        </div>
+
+   
+        <div class="input-group">
+            <label>性別</label>
+            <div class="gender-group">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">男性</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">女性</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">その他</label>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="birthdate">生年月日</label>
+            <input type="date" id="birthdate">
+        </div>
+
+        <div class="input-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" placeholder="example@email.com">
+        </div>
+
+        <div class="input-group">
+            <label for="password">パスワード</label>
+            <input type="password" id="password" placeholder="8文字以上で入力">
+        </div>
+
+        <button onclick="register()">登録する</button>
+
+        <div class="login-link">
+            <a href="login.html">アカウントをお持ちの方はこちら</a>
+        </div>
+    </div>
+
+    <script>
+        function register() {
+            // ここに実際の登録処理（サーバーへのデータ送信など）を書く
+            alert('登録しました！（このメッセージはシミュレーションです）');
+            // 登録完了後にログインページへ移動させる
+            window.location.href = 'login.html';
+        }
+    </script>
+
+</body>
+</html>

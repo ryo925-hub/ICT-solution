@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竹林情報 入力フォーム</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; background-color: #f9f9f9; }
+        .container { max-width: 900px; margin: auto; padding: 2em; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #2c5a3b; border-bottom: 2px solid #2c5a3b; padding-bottom: 0.5em; }
+        .form-group { margin-bottom: 1.5em; }
+        label { display: block; margin-bottom: 0.5em; font-weight: bold; color: #333; }
+        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 0.8em; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { height: 100px; resize: vertical; }
+        button { display: block; width: 100%; padding: 1em; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        
+        /* --- ハンバーガーメニュー --- */
+        .menu-toggle { position: fixed; top: 15px; left: 15px; z-index: 1001; background: #fff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; font-size: 20px; cursor: pointer; color: #2c5a3b; }
+        .nav-menu { position: fixed; top: 0; left: 0; width: 250px; height: 100%; background: #fff; box-shadow: 2px 0 5px rgba(0,0,0,0.1); transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1000; padding-top: 60px; }
+        .nav-menu.open { transform: translateX(0); }
+        .nav-menu ul { list-style: none; padding: 0; margin: 0; }
+        .nav-menu li a { display: block; padding: 15px 25px; color: #2c5a3b; text-decoration: none; font-size: 1em; border-bottom: 1px solid #f0f0f0; }
+        .nav-menu li a:hover { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <button id="menu-toggle" class="menu-toggle">三</button>
+    <nav id="nav-menu" class="nav-menu">
+        <ul></ul>
+    </nav>
+
+    <div class="container">
+        <h1 id="form-title">竹林情報 入力フォーム</h1>
+        <form id="bamboo-form">
+            <input type="hidden" id="edit-index" name="edit-index" value="">
+            <div class="form-group">
+                <label for="owner-name">ユーザの名前</label>
+                <input type="text" id="owner-name" name="owner-name" readonly style="background-color: #e9ecef;">
+            </div>
+            <div class="form-group">
+                <label for="address">所在地</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="area">面積 (m²)</label>
+                <input type="number" id="area" name="area">
+            </div>
+            <div class="form-group">
+                <label for="bamboo-type">主な竹の種類</label>
+                <select id="bamboo-type" name="bamboo-type">
+                    <option value="">選択してください</option>
+                    <option value="moso">孟宗竹</option>
+                    <option value="madake">真竹</option>
+                    <option value="hachiku">淡竹</option>
+                    <option value="other">その他</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="condition">状態</label>
+                <select id="condition" name="condition">
+                    <option value="">選択してください</option>
+                    <option value="managed">手入れ済み</option>
+                    <option value="partial">一部放置</option>
+                    <option value="abandoned">完全放置</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="notes">特徴・メモ</label>
+                <textarea id="notes" name="notes"></textarea>
+            </div>
+            <button type="submit" id="submit-button">登録する</button>
+        </form>
+    </div>
+
+    <script>
+        function setupHamburgerMenu() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            if (!menuToggle || !navMenu) return;
+            const menuList = navMenu.querySelector('ul');
+            const loggedInUser = sessionStorage.getItem('loggedInUser');
+            menuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+            let menuItemsHTML = `<li><a href="read.html">みんなの投稿を見る</a></li><li><a href="index.html">新しい情報を登録する</a></li>`;
+            if (loggedInUser) {
+                menuItemsHTML = `<li><a href="mypage.html">マイページ (${loggedInUser})</a></li>` + menuItemsHTML + `<hr><li><a href="#" id="logout-link">ログアウト</a></li>`;
+            } else {
+                menuItemsHTML += `<hr><li><a href="login.html">ログイン</a></li>`;
+            }
+            menuList.innerHTML = menuItemsHTML;
+            const logoutLink = document.getElementById('logout-link');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    sessionStorage.removeItem('loggedInUser');
+                    alert('ログアウトしました。');
+                    window.location.href = 'login.html';
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupHamburgerMenu();
+            const loggedInUser = sessionStorage.getItem('loggedInUser');
+            if (!loggedInUser) {
+                alert('ログインが必要です。');
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('owner-name').value = loggedInUser;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const editIndex = urlParams.get('edit');
+            if (editIndex !== null) {
+                document.getElementById('form-title').textContent = '竹林情報の修正';
+                document.getElementById('submit-button').textContent = '更新する';
+                document.getElementById('edit-index').value = editIndex;
+                const savedData = JSON.parse(localStorage.getItem('bambooData')) || [];
+                const dataToEdit = savedData[editIndex];
+                if (dataToEdit) {
+                    document.getElementById('address').value = dataToEdit['address'] || '';
+                    document.getElementById('area').value = dataToEdit['area'] || '';
+                    document.getElementById('bamboo-type').value = dataToEdit['bamboo-type'] || '';
+                    document.getElementById('condition').value = dataToEdit['condition'] || '';
+                    document.getElementById('notes').value = dataToEdit['notes'] || '';
+                }
+            }
+        });
+
+        document.getElementById('bamboo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            const savedData = JSON.parse(localStorage.getItem('bambooData')) || [];
+            const editIndex = document.getElementById('edit-index').value;
+            if (editIndex !== '') {
+                savedData[editIndex] = data;
+                alert('情報を更新しました！');
+            } else {
+                savedData.push(data);
+                alert('情報を登録しました！');
+            }
+            localStorage.setItem('bambooData', JSON.stringify(savedData));
+            window.location.href = 'read.html';
+        });
+    </script>
+</body>
+</html>
