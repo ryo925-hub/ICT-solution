@@ -1,7 +1,7 @@
 const preset = {
     "dev": {
         wsUrl: "ws://localhost:3001",
-        httpUrl: "http://localhost:3000",
+        httpUrl: "http://157.80.143.205:3000",
     },
     "prod": {
         wsUrl: "ws://:3001",

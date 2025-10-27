@@ -8,7 +8,7 @@ export default async function (call: ApiCall<ReqLogin, ResLogin>) {
     // TODO
     const { loginID, password } = call.req
 
-    const user = await Global.collection('users').findOne({ loginID });
+    const user = await Global.collection('users').findOne({ mailAddress: loginID });
 
     if (user === null) {
         return call.error('Invalid loginID or password')
