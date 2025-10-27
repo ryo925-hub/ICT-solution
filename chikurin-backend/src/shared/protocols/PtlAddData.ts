@@ -2,15 +2,13 @@
 // Feel free to delete it
 
 /**
- * 增加数据
- * 此处的注释将会自动附带到生成的 API 文档中
+ * test AddData
+ * This is a test interface for AddData
  */
 export interface ReqAddData {
-    /** 要增加的消息内容 */
     content: string;
 }
 
 export interface ResAddData {
-    /** 服务端内容创建时间 */
     time: Date
 }

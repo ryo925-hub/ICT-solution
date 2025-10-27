@@ -8,11 +8,13 @@
 import { chikurin } from "../shared/entities/chikurin";
 import { creditCard } from "../shared/entities/creditCard";
 import { event } from "../shared/entities/event";
+import { joinEvent } from "../shared/entities/joinEvents";
 import { users } from "../shared/entities/user";
 
 export interface DbCollectionType {
-    users: users
-    chikurin: chikurin
-    creditCard: creditCard
-    event:event
+    users: users,
+    chikurin: chikurin,
+    creditCard: creditCard,
+    event: event,
+    joinEvent: joinEvent,
 }

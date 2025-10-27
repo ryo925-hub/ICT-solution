@@ -1,64 +1,123 @@
 
-# TSRPC API 接口文档
+# API
 
-## 通用说明
+## 説明
 
-- 所有请求方法均为 `POST`
-- 所有请求均需加入以下 Header :
+-  `POST`
+-  Header :
     - `Content-Type: application/json`
 
-## 目录
+## 目次
 
-- [增加数据](#/AddData)
-- [获取数据](#/GetData)
+- Login
+    - [Login](#/Login/Login)
+    - [Regist](#/Login/Regist)
+- [test AddData](#/AddData)
+- [test GetData](#/GetData)
 
 ---
 
-## 增加数据 <a id="/AddData"></a>
+## Login
 
-此处的注释将会自动附带到生成的 API 文档中
+### Login <a id="/Login/Login"></a>
 
-**路径**
-- POST `/AddData`
+**url**
+ `/Login/Login`
 
-**请求**
+**request**
+```ts
+interface ReqLogin {
+    loginID: string,
+    password: string
+}
+```
+
+**response**
+```ts
+interface ResLogin {
+    user: {
+        _id: /*ObjectId*/ string,
+        firstName1: string,
+        lastName1: string,
+        firstName2: string,
+        lastName2: string,
+        birthday: /*datetime*/ string,
+        mailAddress: string,
+        password: string
+    },
+    token: string
+}
+```
+
+---
+
+### Regist <a id="/Login/Regist"></a>
+
+**url**
+ `/Login/Regist`
+
+**request**
+```ts
+interface ReqRegist {
+    firstName1: string,
+    lastName1: string,
+    firstName2: string,
+    lastName2: string,
+    birthday: /*datetime*/ string,
+    mailAddress: string,
+    password: string
+}
+```
+
+**response**
+```ts
+interface ResRegist {
+
+}
+```
+
+---
+
+## test AddData <a id="/AddData"></a>
+
+This is a test interface for AddData
+
+**url**
+ `/AddData`
+
+**request**
 ```ts
 interface ReqAddData {
-    /** 要增加的消息内容 */
     content: string
 }
 ```
 
-**响应**
+**response**
 ```ts
 interface ResAddData {
-    /** 服务端内容创建时间 */
     time: /*datetime*/ string
 }
 ```
 
 ---
 
-## 获取数据 <a id="/GetData"></a>
+## test GetData <a id="/GetData"></a>
 
-**路径**
-- POST `/GetData`
+**url**
+ `/GetData`
 
-**请求**
+**request**
 ```ts
 interface ReqGetData {
 
 }
 ```
 
-**响应**
+**response**
 ```ts
 interface ResGetData {
-    /** 返回所有数据列表 */
     data: {
-        /** 消息内容 */
         content: string,
-        /** 创建时间 */
         time: /*datetime*/ string
     }[]
 }

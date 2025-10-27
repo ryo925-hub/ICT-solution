@@ -3,12 +3,14 @@ import { HttpServer, WsServer } from "tsrpc";
 import { serviceProto } from "./shared/protocols/serviceProto";
 import { log } from "console";
 import { Global } from "./Global";
+import { users } from "./shared/entities/user";
+import testImageNode from "./flowNodes/testImageNode";
 
 // Create the Server
 const server = new HttpServer(serviceProto, {
     port: 3000,
     // Remove this to use binary mode (remove from the client too)
-    json: true
+    json: true,
 });
 const wsServer = new WsServer(serviceProto, {
     port: 3001,
@@ -19,6 +21,8 @@ const wsServer = new WsServer(serviceProto, {
 async function init() {
     // Auto implement APIs
     await server.autoImplementApi(path.resolve(__dirname, 'api'));
+
+    // testImageNode(server)
 
     // TODO
     // Prepare something... (e.g. connect the db)
@@ -52,3 +56,12 @@ async function main() {
 
 };
 main();
+
+declare module 'tsrpc' {
+    export interface ApiCall {
+        currentUser: users
+    }
+    export interface MsgCall {
+        currentUser: users
+    }
+}

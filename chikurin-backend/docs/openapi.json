@@ -5,6 +5,100 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/Login/Login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "Login/Login",
+        "requestBody": {
+          "description": "Req<Login>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login_PtlLogin_ReqLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResLogin>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Login_PtlLogin_ResLogin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Login/Regist": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "Login/Regist",
+        "requestBody": {
+          "description": "Req<Regist>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login_PtlRegist_ReqRegist"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResRegist>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Login_PtlRegist_ResRegist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/AddData": {
       "post": {
         "operationId": "AddData",
@@ -96,26 +190,213 @@
   },
   "components": {
     "schemas": {
+      "Login_PtlLogin_ReqLogin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "loginID": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "loginID",
+              "password"
+            ]
+          }
+        ]
+      },
+      "base_BaseRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "Login_PtlLogin_ResLogin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "user": {
+                "$ref": "#/components/schemas/___entities_user_users"
+              },
+              "token": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "user",
+              "token"
+            ]
+          }
+        ]
+      },
+      "base_BaseResponse": {
+        "type": "object",
+        "properties": {}
+      },
+      "___entities_user_users": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          },
+          "firstName1": {
+            "type": "string"
+          },
+          "lastName1": {
+            "type": "string"
+          },
+          "firstName2": {
+            "type": "string"
+          },
+          "lastName2": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mailAddress": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "_id",
+          "firstName1",
+          "lastName1",
+          "firstName2",
+          "lastName2",
+          "birthday",
+          "mailAddress",
+          "password"
+        ]
+      },
+      "Login_PtlRegist_ReqRegist": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "firstName1": {
+                "type": "string"
+              },
+              "lastName1": {
+                "type": "string"
+              },
+              "firstName2": {
+                "type": "string"
+              },
+              "lastName2": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "mailAddress": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "firstName1",
+              "lastName1",
+              "firstName2",
+              "lastName2",
+              "birthday",
+              "mailAddress",
+              "password"
+            ]
+          }
+        ]
+      },
+      "Login_PtlRegist_ResRegist": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "MsgChat_MsgChat": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      },
+      "MsgTest_MsgTest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Male"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Female"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "age",
+          "gender"
+        ]
+      },
       "PtlAddData_ReqAddData": {
         "type": "object",
         "properties": {
           "content": {
-            "type": "string",
-            "description": "要增加的消息内容"
+            "type": "string"
           }
         },
         "required": [
           "content"
         ],
-        "description": "增加数据\r\n此处的注释将会自动附带到生成的 API 文档中"
+        "description": "test AddData\r\nThis is a test interface for AddData"
       },
       "PtlAddData_ResAddData": {
         "type": "object",
         "properties": {
           "time": {
             "type": "string",
-            "format": "date-time",
-            "description": "服务端内容创建时间"
+            "format": "date-time"
           }
         },
         "required": [
@@ -123,38 +404,49 @@
         ]
       },
       "PtlGetData_ReqGetData": {
-        "type": "object",
-        "properties": {},
-        "description": "获取数据"
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "test GetData"
       },
       "PtlGetData_ResGetData": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "content": {
-                  "type": "string",
-                  "description": "消息内容"
-                },
-                "time": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "创建时间"
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "string"
+                    },
+                    "time": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "content",
+                    "time"
+                  ]
                 }
-              },
-              "required": [
-                "content",
-                "time"
-              ]
+              }
             },
-            "description": "返回所有数据列表"
+            "required": [
+              "data"
+            ]
           }
-        },
-        "required": [
-          "data"
         ]
       },
       "?bson_ObjectID": {
