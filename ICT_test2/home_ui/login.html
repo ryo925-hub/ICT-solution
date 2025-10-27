@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン画面</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <style>
         body {
             font-family: sans-serif;
@@ -81,7 +82,8 @@
             <label for="password">パスワード</label>
             <input type="password" id="password" placeholder="パスワードを入力">
         </div>
-        <button onclick="login()">ログイン</button>
+        <script type="module" src="login.js"></script>
+        <button id="button">ログイン</button>
 
         <div class="register-link">
             <a href="register.html">新規会員登録はこちら</a>
@@ -89,18 +91,6 @@
         
     </div>
 
-    <script>
-        function login() {
-            const loginId = document.getElementById('loginId').value;
-            const password = document.getElementById('password').value;
-
-            if (loginId === 'admin' && password === 'password') {
-                window.location.href = 'index.html'; 
-            } else {
-                alert('ログインIDまたはパスワードが間違っています。');
-            }
-        }
-    </script>
 
 </body>
 </html>
