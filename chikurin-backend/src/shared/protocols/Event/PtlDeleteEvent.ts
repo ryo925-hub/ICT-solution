@@ -2,13 +2,13 @@ import { ObjectId } from "mongodb";
 import { BaseRequest, BaseResponse, BaseConf } from "../base";
 
 /**
- * Unjoin event
+ * Delete one event by id
  */
-export interface ReqUnjoinEvent extends BaseRequest {
+export interface ReqDeleteEvent extends BaseRequest {
     eventID: ObjectId
 }
 
-export interface ResUnjoinEvent extends BaseResponse {
+export interface ResDeleteEvent extends BaseResponse {
 
 }
 

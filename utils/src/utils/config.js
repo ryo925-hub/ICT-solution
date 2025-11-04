@@ -1,8 +1,7 @@
 const preset = {
     "dev": {
         wsUrl: "ws://localhost:3001",
-        // httpUrl: "https://m1.apifoxmock.com/m1/7193386-6918779-default",
-        httpUrl: "http://localhost:3000",
+        httpUrl: "https://m1.apifoxmock.com/m1/7193386-6918779-default",
     },
     "prod": {
         wsUrl: "ws://:3001",

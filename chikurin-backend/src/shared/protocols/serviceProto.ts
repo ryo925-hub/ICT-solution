@@ -1,5 +1,15 @@
 import { ServiceProto } from 'tsrpc-proto';
+import { ReqAddChikurin, ResAddChikurin } from './Chikurin/PtlAddChikurin';
+import { ReqDeleteChikurin, ResDeleteChikurin } from './Chikurin/PtlDeleteChikurin';
+import { ReqGetChikurin, ResGetChikurin } from './Chikurin/PtlGetChikurin';
+import { ReqGetChikurins, ResGetChikurins } from './Chikurin/PtlGetChikurins';
+import { ReqGetOwnningChikurin, ResGetOwnningChikurin } from './Chikurin/PtlGetOwnningChikurin';
+import { ReqAddEvent, ResAddEvent } from './Event/PtlAddEvent';
+import { ReqDeleteEvent, ResDeleteEvent } from './Event/PtlDeleteEvent';
+import { ReqGetEvent, ResGetEvent } from './Event/PtlGetEvent';
 import { ReqGetEvents, ResGetEvents } from './Event/PtlGetEvents';
+import { ReqGetEventsHosting, ResGetEventsHosting } from './Event/PtlGetEventsHosting';
+import { ReqGetJointEvents, ResGetJointEvents } from './Event/PtlGetJointEvents';
 import { ReqJoinEvent, ResJoinEvent } from './Event/PtlJoinEvent';
 import { ReqUnjoinEvent, ResUnjoinEvent } from './Event/PtlUnjoinEvent';
 import { ReqLogin, ResLogin } from './Login/PtlLogin';
@@ -12,9 +22,49 @@ import { ReqUploadImageTest, ResUploadImageTest } from './PtlUploadImageTest';
 
 export interface ServiceType {
     api: {
+        "Chikurin/AddChikurin": {
+            req: ReqAddChikurin,
+            res: ResAddChikurin
+        },
+        "Chikurin/DeleteChikurin": {
+            req: ReqDeleteChikurin,
+            res: ResDeleteChikurin
+        },
+        "Chikurin/GetChikurin": {
+            req: ReqGetChikurin,
+            res: ResGetChikurin
+        },
+        "Chikurin/GetChikurins": {
+            req: ReqGetChikurins,
+            res: ResGetChikurins
+        },
+        "Chikurin/GetOwnningChikurin": {
+            req: ReqGetOwnningChikurin,
+            res: ResGetOwnningChikurin
+        },
+        "Event/AddEvent": {
+            req: ReqAddEvent,
+            res: ResAddEvent
+        },
+        "Event/DeleteEvent": {
+            req: ReqDeleteEvent,
+            res: ResDeleteEvent
+        },
+        "Event/GetEvent": {
+            req: ReqGetEvent,
+            res: ResGetEvent
+        },
         "Event/GetEvents": {
             req: ReqGetEvents,
             res: ResGetEvents
+        },
+        "Event/GetEventsHosting": {
+            req: ReqGetEventsHosting,
+            res: ResGetEventsHosting
+        },
+        "Event/GetJointEvents": {
+            req: ReqGetJointEvents,
+            res: ResGetJointEvents
         },
         "Event/JoinEvent": {
             req: ReqJoinEvent,
@@ -52,11 +102,91 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 12,
+    "version": 15,
     "services": [
+        {
+            "id": 10,
+            "name": "Chikurin/AddChikurin",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 11,
+            "name": "Chikurin/DeleteChikurin",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 12,
+            "name": "Chikurin/GetChikurin",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 13,
+            "name": "Chikurin/GetChikurins",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 14,
+            "name": "Chikurin/GetOwnningChikurin",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 15,
+            "name": "Event/AddEvent",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 16,
+            "name": "Event/DeleteEvent",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 17,
+            "name": "Event/GetEvent",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
         {
             "id": 6,
             "name": "Event/GetEvents",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 18,
+            "name": "Event/GetEventsHosting",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 19,
+            "name": "Event/GetJointEvents",
             "type": "api",
             "conf": {
                 "needLogin": true
@@ -124,14 +254,56 @@ export const serviceProto: ServiceProto<ServiceType> = {
         }
     ],
     "types": {
-        "Event/PtlGetEvents/ReqGetEvents": {
+        "Chikurin/PtlAddChikurin/ReqAddChikurin": {
             "type": "Interface",
             "extends": [
+                {
+                    "id": 1,
+                    "type": {
+                        "target": {
+                            "type": "Reference",
+                            "target": "../entities/chikurin/chikurin"
+                        },
+                        "keys": [
+                            "_id",
+                            "owner"
+                        ],
+                        "type": "Omit"
+                    }
+                },
                 {
                     "id": 0,
                     "type": {
                         "type": "Reference",
                         "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "../entities/chikurin/chikurin": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "_id",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "owner",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
                     }
                 }
             ]
@@ -146,6 +318,349 @@ export const serviceProto: ServiceProto<ServiceType> = {
                         "type": "String"
                     },
                     "optional": true
+                }
+            ]
+        },
+        "Chikurin/PtlAddChikurin/ResAddChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "chikurinID",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "base/BaseResponse": {
+            "type": "Interface"
+        },
+        "Chikurin/PtlDeleteChikurin/ReqDeleteChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "chikurinID",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "Chikurin/PtlDeleteChikurin/ResDeleteChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
+        "Chikurin/PtlGetChikurin/ReqGetChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "chikurinID",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "Chikurin/PtlGetChikurin/ResGetChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "chikurin",
+                    "type": {
+                        "type": "Reference",
+                        "target": "../entities/chikurin/chikurin"
+                    }
+                }
+            ]
+        },
+        "Chikurin/PtlGetChikurins/ReqGetChikurins": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "Chikurin/PtlGetChikurins/ResGetChikurins": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "chikurins",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "../entities/chikurin/chikurin"
+                        }
+                    }
+                }
+            ]
+        },
+        "Chikurin/PtlGetOwnningChikurin/ReqGetOwnningChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "Chikurin/PtlGetOwnningChikurin/ResGetOwnningChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "chikurins",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "../entities/chikurin/chikurin"
+                        }
+                    }
+                }
+            ]
+        },
+        "Event/PtlAddEvent/ReqAddEvent": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                },
+                {
+                    "id": 1,
+                    "type": {
+                        "target": {
+                            "type": "Reference",
+                            "target": "../entities/event/event"
+                        },
+                        "keys": [
+                            "_id",
+                            "hoster"
+                        ],
+                        "type": "Omit"
+                    }
+                }
+            ]
+        },
+        "../entities/event/event": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "_id",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "hoster",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "Event/PtlAddEvent/ResAddEvent": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "eventID",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "Event/PtlDeleteEvent/ReqDeleteEvent": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "eventID",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "Event/PtlDeleteEvent/ResDeleteEvent": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
+        "Event/PtlGetEvent/ReqGetEvent": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "eventID",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "Event/PtlGetEvent/ResGetEvent": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "event",
+                    "type": {
+                        "type": "Reference",
+                        "target": "../entities/event/event"
+                    }
+                }
+            ]
+        },
+        "Event/PtlGetEvents/ReqGetEvents": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
                 }
             ]
         },
@@ -174,18 +689,76 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "base/BaseResponse": {
-            "type": "Interface"
-        },
-        "../entities/event/event": {
+        "Event/PtlGetEventsHosting/ReqGetEventsHosting": {
             "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "Event/PtlGetEventsHosting/ResGetEventsHosting": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
             "properties": [
                 {
                     "id": 0,
-                    "name": "_id",
+                    "name": "events",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "../entities/event/event"
+                        }
+                    }
+                }
+            ]
+        },
+        "Event/PtlGetJointEvents/ReqGetJointEvents": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
                     "type": {
                         "type": "Reference",
-                        "target": "?mongodb/ObjectId"
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "Event/PtlGetJointEvents/ResGetJointEvents": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "events",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "../entities/event/event"
+                        }
                     }
                 }
             ]

@@ -1,15 +1,16 @@
 import { ObjectId } from "mongodb";
 import { BaseRequest, BaseResponse, BaseConf } from "../base";
+import { event } from "../../entities/event";
 
 /**
- * Unjoin event
+ * Get one event by id
  */
-export interface ReqUnjoinEvent extends BaseRequest {
+export interface ReqGetEvent extends BaseRequest {
     eventID: ObjectId
 }
 
-export interface ResUnjoinEvent extends BaseResponse {
-
+export interface ResGetEvent extends BaseResponse {
+    event: event
 }
 
 export const conf: BaseConf = {

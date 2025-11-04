@@ -5,6 +5,382 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/Chikurin/AddChikurin": {
+      "post": {
+        "tags": [
+          "Chikurin"
+        ],
+        "operationId": "Chikurin/AddChikurin",
+        "requestBody": {
+          "description": "Req<AddChikurin>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chikurin_PtlAddChikurin_ReqAddChikurin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResAddChikurin>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Chikurin_PtlAddChikurin_ResAddChikurin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Chikurin/DeleteChikurin": {
+      "post": {
+        "tags": [
+          "Chikurin"
+        ],
+        "operationId": "Chikurin/DeleteChikurin",
+        "requestBody": {
+          "description": "Req<DeleteChikurin>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chikurin_PtlDeleteChikurin_ReqDeleteChikurin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResDeleteChikurin>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Chikurin_PtlDeleteChikurin_ResDeleteChikurin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Chikurin/GetChikurin": {
+      "post": {
+        "tags": [
+          "Chikurin"
+        ],
+        "operationId": "Chikurin/GetChikurin",
+        "requestBody": {
+          "description": "Req<GetChikurin>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chikurin_PtlGetChikurin_ReqGetChikurin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetChikurin>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Chikurin_PtlGetChikurin_ResGetChikurin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Chikurin/GetChikurins": {
+      "post": {
+        "tags": [
+          "Chikurin"
+        ],
+        "operationId": "Chikurin/GetChikurins",
+        "requestBody": {
+          "description": "Req<GetChikurins>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chikurin_PtlGetChikurins_ReqGetChikurins"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetChikurins>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Chikurin_PtlGetChikurins_ResGetChikurins"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Chikurin/GetOwnningChikurin": {
+      "post": {
+        "tags": [
+          "Chikurin"
+        ],
+        "operationId": "Chikurin/GetOwnningChikurin",
+        "requestBody": {
+          "description": "Req<GetOwnningChikurin>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chikurin_PtlGetOwnningChikurin_ReqGetOwnningChikurin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetOwnningChikurin>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Chikurin_PtlGetOwnningChikurin_ResGetOwnningChikurin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Event/AddEvent": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/AddEvent",
+        "requestBody": {
+          "description": "Req<AddEvent>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlAddEvent_ReqAddEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResAddEvent>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlAddEvent_ResAddEvent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Event/DeleteEvent": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/DeleteEvent",
+        "requestBody": {
+          "description": "Req<DeleteEvent>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlDeleteEvent_ReqDeleteEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResDeleteEvent>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlDeleteEvent_ResDeleteEvent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Event/GetEvent": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/GetEvent",
+        "requestBody": {
+          "description": "Req<GetEvent>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlGetEvent_ReqGetEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetEvent>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlGetEvent_ResGetEvent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/Event/GetEvents": {
       "post": {
         "tags": [
@@ -39,6 +415,100 @@
                     },
                     "res": {
                       "$ref": "#/components/schemas/Event_PtlGetEvents_ResGetEvents"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Event/GetEventsHosting": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/GetEventsHosting",
+        "requestBody": {
+          "description": "Req<GetEventsHosting>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlGetEventsHosting_ReqGetEventsHosting"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetEventsHosting>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlGetEventsHosting_ResGetEventsHosting"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Event/GetJointEvents": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/GetJointEvents",
+        "requestBody": {
+          "description": "Req<GetJointEvents>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlGetJointEvents_ReqGetJointEvents"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetJointEvents>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlGetJointEvents_ResGetJointEvents"
                     }
                   }
                 }
@@ -375,6 +845,338 @@
   },
   "components": {
     "schemas": {
+      "Chikurin_PtlAddChikurin_ReqAddChikurin": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "Add chikurin"
+      },
+      "___entities_chikurin_chikurin": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          }
+        },
+        "required": [
+          "_id",
+          "name",
+          "owner"
+        ]
+      },
+      "base_BaseRequest": {
+        "type": "object",
+        "properties": {
+          "__token": {
+            "type": "string"
+          }
+        }
+      },
+      "Chikurin_PtlAddChikurin_ResAddChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chikurinID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "chikurinID"
+            ]
+          }
+        ]
+      },
+      "base_BaseResponse": {
+        "type": "object",
+        "properties": {}
+      },
+      "Chikurin_PtlDeleteChikurin_ReqDeleteChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chikurinID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "chikurinID"
+            ]
+          }
+        ],
+        "description": "Delete chikurin"
+      },
+      "Chikurin_PtlDeleteChikurin_ResDeleteChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "Chikurin_PtlGetChikurin_ReqGetChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chikurinID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "chikurinID"
+            ]
+          }
+        ],
+        "description": "Get one Chikurin information by id"
+      },
+      "Chikurin_PtlGetChikurin_ResGetChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chikurin": {
+                "$ref": "#/components/schemas/___entities_chikurin_chikurin"
+              }
+            },
+            "required": [
+              "chikurin"
+            ]
+          }
+        ]
+      },
+      "Chikurin_PtlGetChikurins_ReqGetChikurins": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "Get chikurins"
+      },
+      "Chikurin_PtlGetChikurins_ResGetChikurins": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chikurins": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/___entities_chikurin_chikurin"
+                }
+              }
+            },
+            "required": [
+              "chikurins"
+            ]
+          }
+        ]
+      },
+      "Chikurin_PtlGetOwnningChikurin_ReqGetOwnningChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "Get ownning chikurin"
+      },
+      "Chikurin_PtlGetOwnningChikurin_ResGetOwnningChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chikurins": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/___entities_chikurin_chikurin"
+                }
+              }
+            },
+            "required": [
+              "chikurins"
+            ]
+          }
+        ]
+      },
+      "Event_PtlAddEvent_ReqAddEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "Add event"
+      },
+      "___entities_event_event": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "hoster": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          }
+        },
+        "required": [
+          "_id",
+          "name",
+          "hoster"
+        ]
+      },
+      "Event_PtlAddEvent_ResAddEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eventID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "eventID"
+            ]
+          }
+        ]
+      },
+      "Event_PtlDeleteEvent_ReqDeleteEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eventID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "eventID"
+            ]
+          }
+        ],
+        "description": "Delete one event by id"
+      },
+      "Event_PtlDeleteEvent_ResDeleteEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "Event_PtlGetEvent_ReqGetEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eventID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "eventID"
+            ]
+          }
+        ],
+        "description": "Get one event by id"
+      },
+      "Event_PtlGetEvent_ResGetEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "event": {
+                "$ref": "#/components/schemas/___entities_event_event"
+              }
+            },
+            "required": [
+              "event"
+            ]
+          }
+        ]
+      },
       "Event_PtlGetEvents_ReqGetEvents": {
         "allOf": [
           {
@@ -385,15 +1187,7 @@
             "properties": {}
           }
         ],
-        "description": "Get events information"
-      },
-      "base_BaseRequest": {
-        "type": "object",
-        "properties": {
-          "__token": {
-            "type": "string"
-          }
-        }
+        "description": "Get events"
       },
       "Event_PtlGetEvents_ResGetEvents": {
         "allOf": [
@@ -416,19 +1210,70 @@
           }
         ]
       },
-      "base_BaseResponse": {
-        "type": "object",
-        "properties": {}
-      },
-      "___entities_event_event": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "$ref": "#/components/schemas/?mongodb_ObjectId"
+      "Event_PtlGetEventsHosting_ReqGetEventsHosting": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
           }
-        },
-        "required": [
-          "_id"
+        ],
+        "description": "Get hosting events"
+      },
+      "Event_PtlGetEventsHosting_ResGetEventsHosting": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/___entities_event_event"
+                }
+              }
+            },
+            "required": [
+              "events"
+            ]
+          }
+        ]
+      },
+      "Event_PtlGetJointEvents_ReqGetJointEvents": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "Get joint events"
+      },
+      "Event_PtlGetJointEvents_ResGetJointEvents": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/___entities_event_event"
+                }
+              }
+            },
+            "required": [
+              "events"
+            ]
+          }
         ]
       },
       "Event_PtlJoinEvent_ReqJoinEvent": {
@@ -478,7 +1323,7 @@
             ]
           }
         ],
-        "description": "Request to unjoin an event"
+        "description": "Unjoin event"
       },
       "Event_PtlUnjoinEvent_ResUnjoinEvent": {
         "allOf": [
@@ -538,6 +1383,9 @@
       "___entities_user_users": {
         "type": "object",
         "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          },
           "firstName1": {
             "type": "string"
           },
@@ -565,6 +1413,7 @@
           }
         },
         "required": [
+          "_id",
           "firstName1",
           "lastName1",
           "firstName2",

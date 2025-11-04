@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { BaseRequest, BaseResponse, BaseConf } from "../base";
 
 /**
- * Request to unjoin an event
+ * Unjoin event
  */
 export interface ReqUnjoinEvent extends BaseRequest {
     eventID: ObjectId

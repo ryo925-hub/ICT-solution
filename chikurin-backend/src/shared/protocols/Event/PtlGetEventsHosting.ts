@@ -2,13 +2,13 @@ import { event } from "../../entities/event";
 import { BaseRequest, BaseResponse, BaseConf } from "../base";
 
 /**
- * Get events
+ * Get hosting events
  */
-export interface ReqGetEvents extends BaseRequest {
-
+export interface ReqGetEventsHosting extends BaseRequest {
+    
 }
 
-export interface ResGetEvents extends BaseResponse {
+export interface ResGetEventsHosting extends BaseResponse {
     events: event[]
 }
 

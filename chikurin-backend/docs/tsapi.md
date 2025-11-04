@@ -9,10 +9,21 @@
 
 ## 目次
 
+- Chikurin
+    - [Add chikurin](#/Chikurin/AddChikurin)
+    - [Delete chikurin](#/Chikurin/DeleteChikurin)
+    - [Get one Chikurin information by id](#/Chikurin/GetChikurin)
+    - [Get chikurins](#/Chikurin/GetChikurins)
+    - [Get ownning chikurin](#/Chikurin/GetOwnningChikurin)
 - Event
-    - [Get events information](#/Event/GetEvents)
+    - [Add event](#/Event/AddEvent)
+    - [Delete one event by id](#/Event/DeleteEvent)
+    - [Get one event by id](#/Event/GetEvent)
+    - [Get events](#/Event/GetEvents)
+    - [Get hosting events](#/Event/GetEventsHosting)
+    - [Get joint events](#/Event/GetJointEvents)
     - [Join event](#/Event/JoinEvent)
-    - [Request to unjoin an event](#/Event/UnjoinEvent)
+    - [Unjoin event](#/Event/UnjoinEvent)
 - Login
     - [Login](#/Login/Login)
     - [Regist](#/Login/Regist)
@@ -22,9 +33,257 @@
 
 ---
 
+## Chikurin
+
+### Add chikurin <a id="/Chikurin/AddChikurin"></a>
+
+**url**
+ `/Chikurin/AddChikurin`
+
+**request**
+```ts
+interface ReqAddChikurin {
+    name: string,
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResAddChikurin {
+    chikurinID: /*ObjectId*/ string
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Delete chikurin <a id="/Chikurin/DeleteChikurin"></a>
+
+**url**
+ `/Chikurin/DeleteChikurin`
+
+**request**
+```ts
+interface ReqDeleteChikurin {
+    chikurinID: /*ObjectId*/ string,
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResDeleteChikurin {
+
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Get one Chikurin information by id <a id="/Chikurin/GetChikurin"></a>
+
+**url**
+ `/Chikurin/GetChikurin`
+
+**request**
+```ts
+interface ReqGetChikurin {
+    chikurinID: /*ObjectId*/ string,
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetChikurin {
+    chikurin: {
+        _id: /*ObjectId*/ string,
+        name: string,
+        owner: /*ObjectId*/ string
+    }
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Get chikurins <a id="/Chikurin/GetChikurins"></a>
+
+**url**
+ `/Chikurin/GetChikurins`
+
+**request**
+```ts
+interface ReqGetChikurins {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetChikurins {
+    chikurins: {
+        _id: /*ObjectId*/ string,
+        name: string,
+        owner: /*ObjectId*/ string
+    }[]
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Get ownning chikurin <a id="/Chikurin/GetOwnningChikurin"></a>
+
+**url**
+ `/Chikurin/GetOwnningChikurin`
+
+**request**
+```ts
+interface ReqGetOwnningChikurin {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetOwnningChikurin {
+    chikurins: {
+        _id: /*ObjectId*/ string,
+        name: string,
+        owner: /*ObjectId*/ string
+    }[]
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
 ## Event
 
-### Get events information <a id="/Event/GetEvents"></a>
+### Add event <a id="/Event/AddEvent"></a>
+
+**url**
+ `/Event/AddEvent`
+
+**request**
+```ts
+interface ReqAddEvent {
+    __token?: string,
+    name: string
+}
+```
+
+**response**
+```ts
+interface ResAddEvent {
+    eventID: /*ObjectId*/ string
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Delete one event by id <a id="/Event/DeleteEvent"></a>
+
+**url**
+ `/Event/DeleteEvent`
+
+**request**
+```ts
+interface ReqDeleteEvent {
+    eventID: /*ObjectId*/ string,
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResDeleteEvent {
+
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Get one event by id <a id="/Event/GetEvent"></a>
+
+**url**
+ `/Event/GetEvent`
+
+**request**
+```ts
+interface ReqGetEvent {
+    eventID: /*ObjectId*/ string,
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetEvent {
+    event: {
+        _id: /*ObjectId*/ string,
+        name: string,
+        hoster: /*ObjectId*/ string
+    }
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Get events <a id="/Event/GetEvents"></a>
 
 **url**
  `/Event/GetEvents`
@@ -39,7 +298,75 @@ interface ReqGetEvents {
 **response**
 ```ts
 interface ResGetEvents {
-    events: { _id: /*ObjectId*/ string }[]
+    events: {
+        _id: /*ObjectId*/ string,
+        name: string,
+        hoster: /*ObjectId*/ string
+    }[]
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Get hosting events <a id="/Event/GetEventsHosting"></a>
+
+**url**
+ `/Event/GetEventsHosting`
+
+**request**
+```ts
+interface ReqGetEventsHosting {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetEventsHosting {
+    events: {
+        _id: /*ObjectId*/ string,
+        name: string,
+        hoster: /*ObjectId*/ string
+    }[]
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### Get joint events <a id="/Event/GetJointEvents"></a>
+
+**url**
+ `/Event/GetJointEvents`
+
+**request**
+```ts
+interface ReqGetJointEvents {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetJointEvents {
+    events: {
+        _id: /*ObjectId*/ string,
+        name: string,
+        hoster: /*ObjectId*/ string
+    }[]
 }
 ```
 
@@ -81,7 +408,7 @@ interface ResJoinEvent {
 
 ---
 
-### Request to unjoin an event <a id="/Event/UnjoinEvent"></a>
+### Unjoin event <a id="/Event/UnjoinEvent"></a>
 
 **url**
  `/Event/UnjoinEvent`
@@ -130,6 +457,7 @@ interface ReqLogin {
 ```ts
 interface ResLogin {
     user: {
+        _id: /*ObjectId*/ string,
         firstName1: string,
         lastName1: string,
         firstName2: string,
@@ -223,6 +551,13 @@ interface ResGetData {
         content: string,
         time: /*datetime*/ string
     }[]
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
 }
 ```
 

@@ -2,7 +2,7 @@ import { event } from "../../entities/event";
 import { BaseRequest, BaseResponse, BaseConf } from "../base";
 
 /**
- * Get events information
+ * Get events
  */
 export interface ReqGetEvents extends BaseRequest {
 
