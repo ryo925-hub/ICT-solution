@@ -1,11 +1,11 @@
 import { ApiCall } from "tsrpc";
-import { ReqAddChikurin, ResAddChikurin } from "../../shared/protocols/Chikurin/PtlAddChikurin";
+import { ReqUpdateChikurin, ResUpdateChikurin } from "../../shared/protocols/Chikurin/PtlUpdateChikurin";
 import { Global } from "../../Global";
 import upload from "../../utils/upload";
 import { ObjectId } from "mongodb";
 import imageObjToU8 from "../../utils/imageObjToU8";
 
-export default async function (call: ApiCall<ReqAddChikurin, ResAddChikurin>) {
+export default async function (call: ApiCall<ReqUpdateChikurin, ResUpdateChikurin>) {
 
     const imageUrls = new Array<string>;
     const images = call.req.images;
@@ -30,13 +30,15 @@ export default async function (call: ApiCall<ReqAddChikurin, ResAddChikurin>) {
     }
     delete call.req.images;
 
-    const res = await Global.collection('chikurin').insertOne({
-        ...call.req,
-        owner: call.currentUser._id,
-        imgs: imageUrls
-    });
 
-    call.succ({
-        chikurinID: res.insertedId
+    const ret = await Global.collection('chikurin').updateOne({
+        owner: call.currentUser._id,
+    }, {
+        $set: {
+            ...call.req,
+            imgs: imageUrls,
+        }
     })
+
+    call.succ({})
 }

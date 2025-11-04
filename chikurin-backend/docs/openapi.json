@@ -240,6 +240,53 @@
         }
       }
     },
+    "/Chikurin/UpdateChikurin": {
+      "post": {
+        "tags": [
+          "Chikurin"
+        ],
+        "operationId": "Chikurin/UpdateChikurin",
+        "requestBody": {
+          "description": "Req<UpdateChikurin>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chikurin_PtlUpdateChikurin_ReqUpdateChikurin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResUpdateChikurin>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Chikurin_PtlUpdateChikurin_ResUpdateChikurin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/Event/AddEvent": {
       "post": {
         "tags": [
@@ -850,12 +897,36 @@
           {
             "type": "object",
             "properties": {
-              "name": {
+              "ownerName": {
+                "type": "string"
+              },
+              "postCode": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "area": {
+                "type": "number"
+              },
+              "bambooCount": {
+                "type": "number"
+              },
+              "category": {
+                "type": "string"
+              },
+              "else": {
                 "type": "string"
               }
             },
             "required": [
-              "name"
+              "ownerName",
+              "postCode",
+              "address",
+              "area",
+              "bambooCount",
+              "category",
+              "else"
             ]
           },
           {
@@ -863,7 +934,34 @@
           },
           {
             "type": "object",
-            "properties": {}
+            "properties": {
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fileName": {
+                      "type": "string"
+                    },
+                    "fileData": {
+                      "type": "object",
+                      "properties": {},
+                      "additionalProperties": {
+                        "type": "number"
+                      }
+                    },
+                    "fileType": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "fileName",
+                    "fileData",
+                    "fileType"
+                  ]
+                }
+              }
+            }
           }
         ],
         "description": "Add chikurin"
@@ -874,17 +972,48 @@
           "_id": {
             "$ref": "#/components/schemas/?mongodb_ObjectId"
           },
-          "name": {
-            "type": "string"
-          },
           "owner": {
             "$ref": "#/components/schemas/?mongodb_ObjectId"
+          },
+          "ownerName": {
+            "type": "string"
+          },
+          "postCode": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "area": {
+            "type": "number"
+          },
+          "bambooCount": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "else": {
+            "type": "string"
+          },
+          "imgs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
           "_id",
-          "name",
-          "owner"
+          "owner",
+          "ownerName",
+          "postCode",
+          "address",
+          "area",
+          "bambooCount",
+          "category",
+          "else",
+          "imgs"
         ]
       },
       "base_BaseRequest": {
@@ -1050,6 +1179,91 @@
           }
         ]
       },
+      "Chikurin_PtlUpdateChikurin_ReqUpdateChikurin": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "ownerName": {
+                "type": "string"
+              },
+              "postCode": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "area": {
+                "type": "number"
+              },
+              "bambooCount": {
+                "type": "number"
+              },
+              "category": {
+                "type": "string"
+              },
+              "else": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ownerName",
+              "postCode",
+              "address",
+              "area",
+              "bambooCount",
+              "category",
+              "else"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fileName": {
+                      "type": "string"
+                    },
+                    "fileData": {
+                      "type": "object",
+                      "properties": {},
+                      "additionalProperties": {
+                        "type": "number"
+                      }
+                    },
+                    "fileType": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "fileName",
+                    "fileData",
+                    "fileType"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "description": "Update chikurin info"
+      },
+      "Chikurin_PtlUpdateChikurin_ResUpdateChikurin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
       "Event_PtlAddEvent_ReqAddEvent": {
         "allOf": [
           {
@@ -1060,10 +1274,40 @@
             "properties": {
               "name": {
                 "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "area": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "img": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "startTime": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "endTime": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "required": [
-              "name"
+              "name",
+              "category",
+              "area",
+              "price",
+              "img",
+              "description",
+              "startTime",
+              "endTime"
             ]
           },
           {
@@ -1082,14 +1326,44 @@
           "name": {
             "type": "string"
           },
-          "hoster": {
+          "category": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "img": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "owner": {
             "$ref": "#/components/schemas/?mongodb_ObjectId"
           }
         },
         "required": [
           "_id",
           "name",
-          "hoster"
+          "category",
+          "area",
+          "price",
+          "img",
+          "description",
+          "startTime",
+          "endTime",
+          "owner"
         ]
       },
       "Event_PtlAddEvent_ResAddEvent": {

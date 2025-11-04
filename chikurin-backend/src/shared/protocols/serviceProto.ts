@@ -4,6 +4,7 @@ import { ReqDeleteChikurin, ResDeleteChikurin } from './Chikurin/PtlDeleteChikur
 import { ReqGetChikurin, ResGetChikurin } from './Chikurin/PtlGetChikurin';
 import { ReqGetChikurins, ResGetChikurins } from './Chikurin/PtlGetChikurins';
 import { ReqGetOwnningChikurin, ResGetOwnningChikurin } from './Chikurin/PtlGetOwnningChikurin';
+import { ReqUpdateChikurin, ResUpdateChikurin } from './Chikurin/PtlUpdateChikurin';
 import { ReqAddEvent, ResAddEvent } from './Event/PtlAddEvent';
 import { ReqDeleteEvent, ResDeleteEvent } from './Event/PtlDeleteEvent';
 import { ReqGetEvent, ResGetEvent } from './Event/PtlGetEvent';
@@ -41,6 +42,10 @@ export interface ServiceType {
         "Chikurin/GetOwnningChikurin": {
             req: ReqGetOwnningChikurin,
             res: ResGetOwnningChikurin
+        },
+        "Chikurin/UpdateChikurin": {
+            req: ReqUpdateChikurin,
+            res: ResUpdateChikurin
         },
         "Event/AddEvent": {
             req: ReqAddEvent,
@@ -102,7 +107,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 15,
+    "version": 18,
     "services": [
         {
             "id": 10,
@@ -139,6 +144,14 @@ export const serviceProto: ServiceProto<ServiceType> = {
         {
             "id": 14,
             "name": "Chikurin/GetOwnningChikurin",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 20,
+            "name": "Chikurin/UpdateChikurin",
             "type": "api",
             "conf": {
                 "needLogin": true
@@ -258,7 +271,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "type": "Interface",
             "extends": [
                 {
-                    "id": 1,
+                    "id": 2,
                     "type": {
                         "target": {
                             "type": "Reference",
@@ -266,7 +279,8 @@ export const serviceProto: ServiceProto<ServiceType> = {
                         },
                         "keys": [
                             "_id",
-                            "owner"
+                            "owner",
+                            "imgs"
                         ],
                         "type": "Omit"
                     }
@@ -277,6 +291,48 @@ export const serviceProto: ServiceProto<ServiceType> = {
                         "type": "Reference",
                         "target": "base/BaseRequest"
                     }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "images",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Interface",
+                            "properties": [
+                                {
+                                    "id": 0,
+                                    "name": "fileName",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "fileData",
+                                    "type": {
+                                        "type": "Interface",
+                                        "indexSignature": {
+                                            "keyType": "Number",
+                                            "type": {
+                                                "type": "Number"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "fileType",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "optional": true
                 }
             ]
         },
@@ -292,18 +348,70 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
-                    "id": 1,
-                    "name": "name",
-                    "type": {
-                        "type": "String"
-                    }
-                },
-                {
                     "id": 2,
                     "name": "owner",
                     "type": {
                         "type": "Reference",
                         "target": "?mongodb/ObjectId"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "ownerName",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "postCode",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "address",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 6,
+                    "name": "area",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 7,
+                    "name": "bambooCount",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 8,
+                    "name": "category",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 9,
+                    "name": "else",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 10,
+                    "name": "imgs",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "String"
+                        }
                     }
                 }
             ]
@@ -498,6 +606,87 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
+        "Chikurin/PtlUpdateChikurin/ReqUpdateChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 2,
+                    "type": {
+                        "target": {
+                            "type": "Reference",
+                            "target": "../entities/chikurin/chikurin"
+                        },
+                        "keys": [
+                            "_id",
+                            "owner",
+                            "imgs"
+                        ],
+                        "type": "Omit"
+                    }
+                },
+                {
+                    "id": 1,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "images",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Interface",
+                            "properties": [
+                                {
+                                    "id": 0,
+                                    "name": "fileName",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "fileData",
+                                    "type": {
+                                        "type": "Interface",
+                                        "indexSignature": {
+                                            "keyType": "Number",
+                                            "type": {
+                                                "type": "Number"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "fileType",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "Chikurin/PtlUpdateChikurin/ResUpdateChikurin": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
         "Event/PtlAddEvent/ReqAddEvent": {
             "type": "Interface",
             "extends": [
@@ -509,7 +698,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
-                    "id": 1,
+                    "id": 2,
                     "type": {
                         "target": {
                             "type": "Reference",
@@ -517,7 +706,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                         },
                         "keys": [
                             "_id",
-                            "hoster"
+                            "owner"
                         ],
                         "type": "Omit"
                     }
@@ -543,8 +732,57 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
-                    "id": 2,
-                    "name": "hoster",
+                    "id": 3,
+                    "name": "category",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "area",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "price",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 6,
+                    "name": "img",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 7,
+                    "name": "description",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 10,
+                    "name": "startTime",
+                    "type": {
+                        "type": "Date"
+                    }
+                },
+                {
+                    "id": 11,
+                    "name": "endTime",
+                    "type": {
+                        "type": "Date"
+                    }
+                },
+                {
+                    "id": 9,
+                    "name": "owner",
                     "type": {
                         "type": "Reference",
                         "target": "?mongodb/ObjectId"

@@ -1,11 +1,10 @@
-import { ObjectId } from "mongodb";
 import { chikurin } from "../../entities/chikurin";
 import { BaseRequest, BaseResponse, BaseConf } from "../base";
 
 /**
- * Add chikurin
+ * Update chikurin info
  */
-export interface ReqAddChikurin extends Omit<chikurin, '_id' | "owner" | "imgs">, BaseRequest {
+export interface ReqUpdateChikurin extends Omit<chikurin, '_id' | "owner" | "imgs">, BaseRequest {
     images?: {
         fileName: string,
         fileData: { [index: number]: number },
@@ -13,10 +12,10 @@ export interface ReqAddChikurin extends Omit<chikurin, '_id' | "owner" | "imgs">
     }[]
 }
 
-export interface ResAddChikurin extends BaseResponse {
-    chikurinID: ObjectId
+export interface ResUpdateChikurin extends BaseResponse {
+
 }
 
 export const conf: BaseConf = {
-    needLogin: true
+    needLogin: true,
 }

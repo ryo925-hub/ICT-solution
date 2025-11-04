@@ -5,8 +5,12 @@ import { BaseRequest, BaseResponse, BaseConf } from "../base";
 /**
  * Add chikurin
  */
-export interface ReqAddChikurin extends Omit<chikurin, '_id' | "owner">, BaseRequest {
-
+export interface ReqAddChikurin extends Omit<chikurin, '_id' | "owner" | "imgs">, BaseRequest {
+    images?: {
+        fileName: string,
+        fileData: { [index: number]: number },
+        fileType: string,
+    }[]
 }
 
 export interface ResAddChikurin extends BaseResponse {

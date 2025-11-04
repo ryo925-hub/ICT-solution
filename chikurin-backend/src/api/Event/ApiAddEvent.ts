@@ -4,14 +4,14 @@ import { Global } from "../../Global";
 
 export default async function (call: ApiCall<ReqAddEvent, ResAddEvent>) {
     // TODO
-    const hoster = call.currentUser._id;
+    const owner = call.currentUser._id;
     const res = await Global.collection('event').insertOne({
         ...call.req,
-        hoster
+        owner
     });
     await Global.collection('joinEvent').insertOne({
         eventID: res.insertedId,
-        userID: hoster
+        userID: owner
     })
 
     call.succ({

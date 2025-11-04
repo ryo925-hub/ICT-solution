@@ -5,7 +5,7 @@ import { BaseRequest, BaseResponse, BaseConf } from "../base";
 /**
  * Add event
  */
-export interface ReqAddEvent extends BaseRequest, Omit<event, "_id" | "hoster"> {
+export interface ReqAddEvent extends BaseRequest, Omit<event, "_id" | "owner"> {
 
 }
 
