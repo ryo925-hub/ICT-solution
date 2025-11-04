@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>決済方法修正</title>
+    <style>
+        /* (スタイルは payment.html と全く同じ) */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 400px;
+            position: relative;
+        }
+        .edit-link-container {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .edit-link-container a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .edit-link-container a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 1rem; 
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        select,
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        select {
+            margin-bottom: 1.5rem;
+        }
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        .name-group {
+            display: flex;
+            gap: 1rem;
+        }
+        .name-group > div {
+            flex: 1;
+        }
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .bank-info {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .bank-info p {
+            margin: 0.5rem 0;
+        }
+        .back-link-container {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee; 
+            padding-top: 1rem;
+        }
+        .back-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="edit-link-container">
+            <a href="payment.html">登録はこちら</a>
+        </div>
+
+        <h1>💳 決済方法修正</h1>
+
+        <label for="method">決済方法を選択:</label>
+        <select id="method" onchange="showForm()">
+            <option value="">-- 選択してください --</option>
+            <option value="card">クレジットカード</option>
+            <option value="paypal">PayPal</option>
+            <option value="bank">銀行振込</option>
+        </select>
+
+        <form id="paymentForm"></form>
+        
+        <div class="back-link-container">
+            <a href="information.html" class="back-link">個人情報修正に戻る</a>
+        </div>
+        
+    </div>
+
+    <script>
+        function showForm() {
+            const method = document.getElementById('method').value;
+            const formContainer = document.getElementById('paymentForm');
+            let htmlContent = ''; 
+
+            switch (method) {
+                // --- クレジットカードが選ばれた場合 ---
+                case 'card':
+                    htmlContent = `
+                        <div class="input-group">
+                            <label for="cardName">カード名義人</label>
+                            <input type="text" id="cardName" placeholder="TARO YAMADA">
+                        </div>
+                        <div class="input-group">
+                            <label for="cardNumber">カード番号</label>
+                            <input type="tel" id="cardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="input-group name-group">
+                            <div>
+                                <label for="cardExpiry">有効期限</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div>
+                                <label for="cardCVC">セキュリティコード</label>
+                                <input type="text" id="cardCVC" placeholder="123">
+                            </div>
+                        </div>
+                        <button type="button" onclick="updatePayment()">更新する</button>
+                    `;
+                    break;
+
+                // --- PayPalが選ばれた場合 ---
+                case 'paypal':
+                    htmlContent = `
+                        <div class="input-group">
+                            <label for="paypalEmail">PayPalアカウント（メールアドレス）</label>
+                            <input type="email" id="paypalEmail" placeholder="example@paypal.com">
+                        </div>
+                        <button type="button" onclick="updatePayment()">更新する</button>
+                        <p style="text-align:center; margin-top:1rem; font-size:0.9rem;">
+                            （実際にはここでPayPalの認証画面に連携します）
+                        </p>
+                    `;
+                    break;
+
+                // --- 銀行振込が選ばれた場合 ---
+                case 'bank':
+                    htmlContent = `
+                        <p>以下の口座にお振込みください。</p>
+                        <div class="bank-info">
+                            <p><strong>銀行名:</strong> 〇〇銀行 (ギンコウ)</p>
+                            <p><strong>支店名:</strong> △△支店 (シテン)</p>
+                            <p><strong>口座種別:</strong> 普通</p>
+                            <p><strong>口座番号:</strong> 1234567</p>
+                            <p><strong>口座名義:</strong> カ）タケノコ</p>
+                        </div>
+                        <p style="text-align:left; font-size:0.8rem; margin-top:1rem;">
+                            ※振込手数料はお客様のご負担となります。<br>
+                            ※銀行振込を選択した場合、登録ボタンは不要です。
+                        </p>
+                    `;
+                    break;
+                
+                default:
+                    htmlContent = '';
+                    break;
+            }
+            formContainer.innerHTML = htmlContent;
+        }
+
+        // ★★★ 関数名とアラートのメッセージを変更 ★★★
+        function updatePayment() {
+            alert('決済情報を更新しました！（このメッセージはシミュレーションです）');
+        }
+    </script>
+</body>
+</html>

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>竹林情報の登録</title>
+    <title>竹林情報の修正</title>
     <style>
+        /* (スタイルはbamboo.htmlと全く同じ) */
         body {
             font-family: sans-serif;
             display: flex;
@@ -21,11 +22,8 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             width: 400px;
             text-align: center;
-            /* ★★★ 右上ボタン配置のため ★★★ */
             position: relative; 
         }
-        
-        /* ★★★ 右上ボタンのスタイルを追加 ★★★ */
         .edit-link-container {
             position: absolute;
             top: 1rem;
@@ -39,10 +37,8 @@
         .edit-link-container a:hover {
             text-decoration: underline;
         }
-
-        /* ★★★ タイトルのマージン調整 ★★★ */
         h2 {
-            margin-top: 1rem; /* 右上ボタンと被らないように少し下げる */
+            margin-top: 1rem;
             margin-bottom: 1.5rem;
         }
         h3 {
@@ -111,10 +107,10 @@
     <div class="register-container">
     
         <div class="edit-link-container">
-            <a href="bamboo_edit.html">修正はこちら</a>
+            <a href="bamboo.html">登録はこちら</a>
         </div>
 
-        <h2>竹林情報の登録</h2>
+        <h2>竹林情報の修正</h2>
 
         <h3>竹林情報</h3>
 
@@ -151,7 +147,7 @@
             <textarea id="bambooNotes" placeholder="（例）山の斜面にある、管理が数年できていない など"></textarea>
         </div>
 
-        <button onclick="registerBamboo()">竹林情報を登録する</button>
+        <button onclick="updateBamboo()">竹林情報を更新する</button>
 
         <div class="login-link">
             <a href="information.html">個人情報修正に戻る</a>
@@ -160,9 +156,9 @@
 
     <script>
         // ★★★ 関数名とアラート変更 ★★★
-        function registerBamboo() {
-            alert('竹林情報を登録しました！（シミュレーションです）');
-            // 登録後に戻る
+        function updateBamboo() {
+            alert('竹林情報を更新しました！（シミュレーションです）');
+            // 更新後に戻る
             window.location.href = 'information.html'; 
         }
     </script>
