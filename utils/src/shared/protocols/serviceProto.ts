@@ -52,7 +52,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 9,
+    "version": 12,
     "services": [
         {
             "id": 6,
@@ -111,7 +111,10 @@ export const serviceProto: ServiceProto<ServiceType> = {
         {
             "id": 1,
             "name": "GetData",
-            "type": "api"
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
         },
         {
             "id": 9,
@@ -316,7 +319,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "type": "Interface",
             "properties": [
                 {
-                    "id": 0,
+                    "id": 9,
                     "name": "_id",
                     "type": {
                         "type": "Reference",
@@ -368,6 +371,13 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 {
                     "id": 7,
                     "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 8,
+                    "name": "gender",
                     "type": {
                         "type": "String"
                     }
@@ -431,6 +441,13 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 {
                     "id": 6,
                     "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 7,
+                    "name": "gender",
                     "type": {
                         "type": "String"
                     }

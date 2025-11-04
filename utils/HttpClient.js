@@ -23,7 +23,8 @@ const createHttpClient = (presetType) => {
     const sendRequest = (requestName, params) => __awaiter(void 0, void 0, void 0, function* () {
         return new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                const { data } = yield axios.post(`${preset[presetType].httpUrl}/${requestName}`, params);
+                const token = localStorage.getItem('token');
+                const { data } = yield axios.post(`${preset[presetType].httpUrl}/${requestName}`, Object.assign(Object.assign({}, params), { __token: token }));
                 if (data.isSucc) {
                     resolve(data);
                 }

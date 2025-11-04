@@ -5,6 +5,147 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/Event/GetEvents": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/GetEvents",
+        "requestBody": {
+          "description": "Req<GetEvents>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlGetEvents_ReqGetEvents"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetEvents>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlGetEvents_ResGetEvents"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Event/JoinEvent": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/JoinEvent",
+        "requestBody": {
+          "description": "Req<JoinEvent>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlJoinEvent_ReqJoinEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResJoinEvent>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlJoinEvent_ResJoinEvent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Event/UnjoinEvent": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event/UnjoinEvent",
+        "requestBody": {
+          "description": "Req<UnjoinEvent>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_PtlUnjoinEvent_ReqUnjoinEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResUnjoinEvent>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Event_PtlUnjoinEvent_ResUnjoinEvent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/Login/Login": {
       "post": {
         "tags": [
@@ -186,10 +327,170 @@
           }
         }
       }
+    },
+    "/UploadImageTest": {
+      "post": {
+        "operationId": "UploadImageTest",
+        "requestBody": {
+          "description": "Req<UploadImageTest>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PtlUploadImageTest_ReqUploadImageTest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResUploadImageTest>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/PtlUploadImageTest_ResUploadImageTest"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Event_PtlGetEvents_ReqGetEvents": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "Get events information"
+      },
+      "base_BaseRequest": {
+        "type": "object",
+        "properties": {
+          "__token": {
+            "type": "string"
+          }
+        }
+      },
+      "Event_PtlGetEvents_ResGetEvents": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/___entities_event_event"
+                }
+              }
+            },
+            "required": [
+              "events"
+            ]
+          }
+        ]
+      },
+      "base_BaseResponse": {
+        "type": "object",
+        "properties": {}
+      },
+      "___entities_event_event": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          }
+        },
+        "required": [
+          "_id"
+        ]
+      },
+      "Event_PtlJoinEvent_ReqJoinEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eventID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "eventID"
+            ]
+          }
+        ],
+        "description": "Join event"
+      },
+      "Event_PtlJoinEvent_ResJoinEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "Event_PtlUnjoinEvent_ReqUnjoinEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eventID": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "eventID"
+            ]
+          }
+        ],
+        "description": "Request to unjoin an event"
+      },
+      "Event_PtlUnjoinEvent_ResUnjoinEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
       "Login_PtlLogin_ReqLogin": {
         "allOf": [
           {
@@ -211,10 +512,6 @@
             ]
           }
         ]
-      },
-      "base_BaseRequest": {
-        "type": "object",
-        "properties": {}
       },
       "Login_PtlLogin_ResLogin": {
         "allOf": [
@@ -238,16 +535,9 @@
           }
         ]
       },
-      "base_BaseResponse": {
-        "type": "object",
-        "properties": {}
-      },
       "___entities_user_users": {
         "type": "object",
         "properties": {
-          "_id": {
-            "$ref": "#/components/schemas/?mongodb_ObjectId"
-          },
           "firstName1": {
             "type": "string"
           },
@@ -269,17 +559,20 @@
           },
           "password": {
             "type": "string"
+          },
+          "gender": {
+            "type": "string"
           }
         },
         "required": [
-          "_id",
           "firstName1",
           "lastName1",
           "firstName2",
           "lastName2",
           "birthday",
           "mailAddress",
-          "password"
+          "password",
+          "gender"
         ]
       },
       "Login_PtlRegist_ReqRegist": {
@@ -311,6 +604,9 @@
               },
               "password": {
                 "type": "string"
+              },
+              "gender": {
+                "type": "string"
               }
             },
             "required": [
@@ -320,7 +616,8 @@
               "lastName2",
               "birthday",
               "mailAddress",
-              "password"
+              "password",
+              "gender"
             ]
           }
         ]
@@ -445,6 +742,77 @@
             },
             "required": [
               "data"
+            ]
+          }
+        ]
+      },
+      "PtlUploadImageTest_ReqUploadImageTest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "otherString": {
+                "type": "string"
+              },
+              "otherNumber": {
+                "type": "number"
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fileName": {
+                      "type": "string"
+                    },
+                    "fileData": {
+                      "type": "object",
+                      "properties": {},
+                      "additionalProperties": {
+                        "type": "number"
+                      }
+                    },
+                    "fileType": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "fileName",
+                    "fileData",
+                    "fileType"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "otherString",
+              "otherNumber",
+              "images"
+            ]
+          }
+        ],
+        "description": "This is a test request to upload an image."
+      },
+      "PtlUploadImageTest_ResUploadImageTest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "imageUrls": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "imageUrls"
             ]
           }
         ]

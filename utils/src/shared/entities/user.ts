@@ -18,4 +18,5 @@ export interface users {
     birthday: Date
     mailAddress: string
     password: string
+    gender: string
 }

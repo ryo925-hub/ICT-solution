@@ -5,6 +5,7 @@ import { log } from "console";
 import { Global } from "./Global";
 import { users } from "./shared/entities/user";
 import testImageNode from "./flowNodes/testImageNode";
+import { isLogined } from "./flowNodes/isLogined";
 
 // Create the Server
 const server = new HttpServer(serviceProto, {
@@ -26,11 +27,13 @@ async function init() {
 
     // TODO
     // Prepare something... (e.g. connect the db)
-    await Global.initDb()
+    await Global.initDb();
     /* const users = await Global.collection('users').find({}).toArray();
     users.forEach(async user =>{
         console.log(user);
     }) */
+
+    isLogined(server);
 
     wsServer.listenMsg('Chat', async ctx => {
         console.log(ctx.msg.content);

@@ -1,7 +1,7 @@
 // This is a demo code file
 // Feel free to delete it
 
-import { BaseRequest, BaseResponse } from "./base"
+import { BaseRequest, BaseResponse, BaseConf } from "./base"
 
 /**
  * test GetData
@@ -15,4 +15,8 @@ export interface ResGetData extends BaseResponse {
         content: string,
         time: Date
     }[]
+}
+
+export const conf: BaseConf = {
+    needLogin: true
 }

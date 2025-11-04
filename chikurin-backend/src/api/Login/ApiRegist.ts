@@ -4,7 +4,7 @@ import { Global } from "../../Global";
 
 export default async function (call: ApiCall<ReqRegist, ResRegist>) {
     // TODO
-    const { mailAddress, firstName1, lastName1, firstName2, lastName2, birthday, password } = call.req;
+    const { mailAddress, firstName1, lastName1, firstName2, lastName2, birthday, password,gender } = call.req;
 
     const user = await Global.collection('users').findOne({
         mailAddress,
@@ -22,6 +22,7 @@ export default async function (call: ApiCall<ReqRegist, ResRegist>) {
         birthday,
         mailAddress,
         password,
+        gender
     })
     console.log(res);
 

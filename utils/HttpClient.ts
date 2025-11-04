@@ -34,7 +34,12 @@ const createHttpClient = (presetType: keyof typeof preset) => {
     const sendRequest = async <T extends requestNames>(requestName: T, params: requestType[T]['req']): Promise<responseResult<T>> => {
         return new Promise(async (resolve, reject) => {
             try {
-                const { data } = await axios.post(`${preset[presetType].httpUrl}/${requestName}`, params)
+                const token = localStorage.getItem('token');
+
+                const { data } = await axios.post(`${preset[presetType].httpUrl}/${requestName}`, {
+                    ...params,
+                    __token: token
+                })
 
                 if (data.isSucc) {
                     resolve(data as {

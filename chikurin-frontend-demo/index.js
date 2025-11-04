@@ -1,6 +1,8 @@
 import createWsClient from '../utils/WsClient.js';
 import createHttpClient from '../utils/HttpClient.js';
 
+
+//チャット機能で使用するメッセージ
 const { initClient, sendMessage, closeClient, listenMessage, removeMessageListener } = createWsClient("dev")
 
 const wsClient = await initClient();
@@ -31,6 +33,8 @@ if (wsClient.isSucc) {
 else {
 }
 
+
+//httpクライアント
 const { sendRequest } = createHttpClient("dev");
 
 const res = await sendRequest('AddData', {

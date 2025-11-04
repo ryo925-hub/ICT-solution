@@ -5,6 +5,8 @@ import { ReqGetData, ResGetData } from "../shared/protocols/PtlGetData";
 // Feel free to delete it
 
 export default async function (call: ApiCall<ReqGetData, ResGetData>) {
+    console.log(call.currentUser);
+
     call.succ({
         data: AllData
     })

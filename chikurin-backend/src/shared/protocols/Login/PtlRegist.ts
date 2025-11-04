@@ -8,6 +8,7 @@ export interface ReqRegist extends BaseRequest {
     birthday: Date
     mailAddress: string
     password: string
+    gender: string
 }
 
 export interface ResRegist extends BaseResponse {
