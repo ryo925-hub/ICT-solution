@@ -1,46 +1,75 @@
+/**
+ * 階層を自動解決するハンガーメニュー (メニュー項目修正版)
+ */
 function setupHamburgerMenu() {
-      const menuToggle = document.getElementById('menu-toggle');
-      const navMenu = document.getElementById('nav-menu');
-      const menuList = navMenu.querySelector('ul');
-      const loggedInUser = sessionStorage.getItem('loggedInUser');
+    const scriptTags = document.querySelectorAll('script[src*="humbarger.js"]');
+    if (scriptTags.length === 0) {
+        console.error('humbarger.js: 自身の<script>タグを見つけられません。');
+        return;
+    }
+    const thisScript = scriptTags[scriptTags.length - 1]; 
 
-      if (!menuToggle || !navMenu || !menuList) return;
-
-      // メニュー内容を構築
-      let menuItemsHTML = `
-        <li><a href="mypage.html">マイページ</a></li>
-        <li><a href="event/event_exp.html">体験一覧</a></li>
-        <li><a href="event/event_mer.html">商品一覧</a></li>
-        <li><a href="event/article.html">記事一覧</a></li>
-        <li><a href="read.html">みんなの投稿を見る</a></li>
-        <li><a href="chat.html">お問い合わせ</a></li>
-      `;
-      if (loggedInUser) {
-        menuItemsHTML =
-          `<li><a href="mypage.html">マイページ (${loggedInUser})</a></li>` +
-          menuItemsHTML +
-          `<hr><li><a href="#" id="logout-link">ログアウト</a></li>`;
-      } else {
-        menuItemsHTML += `<hr><li><a href="login.html">ログイン</a></li>`;
-      }
-
-      menuList.innerHTML = menuItemsHTML;
-
-      // ハンバーガーの開閉
-      menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('open');
-      });
-
-      // ログアウト処理
-      const logoutLink = document.getElementById('logout-link');
-      if (logoutLink) {
-        logoutLink.addEventListener('click', (event) => {
-          event.preventDefault();
-          sessionStorage.removeItem('loggedInUser');
-          alert('ログアウトしました。');
-          window.location.href = 'login.html';
-        });
-      }
+    const rootPath = thisScript.dataset.root;
+    if (typeof rootPath === 'undefined') {
+        console.error('humbarger.js: <script> タグに data-root 属性がありません。HTML側を確認してください。');
+        return;
     }
 
-    document.addEventListener('DOMContentLoaded', setupHamburgerMenu);
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (!menuToggle || !navMenu) {
+         return; 
+    }
+
+    const menuList = navMenu.querySelector('ul');
+    if (!menuList) return; 
+
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    let menuItemsHTML = '';
+
+    // ★★★ 修正点: ログイン状態に応じてメニュー構成を最適化 ★★★
+    if (loggedInUser) {
+        // ログイン時のメニュー
+        menuItemsHTML = `
+            <li><a href="${rootPath}index.html">ホーム</a></li>
+            <li><a href="${rootPath}event/event_mer.html">商品一覧</a></li>
+            <li><a href="${rootPath}event/event_exp.html">体験一覧</a></li>
+            <li><a href="${rootPath}event/article.html">記事一覧</a></li>
+            <li><a href="${rootPath}mypage.html">マイページ (${loggedInUser})</a></li>
+            <li><a href="${rootPath}chat.html">お問い合わせ</a></li>
+            <hr>
+            <li><a href="#" id="logout-link">ログアウト</a></li>
+        `;
+    } else {
+        // ログアウト時のメニュー
+        menuItemsHTML = `
+            <li><a href="${rootPath}index.html">ホーム</a></li>
+            <li><a href="${rootPath}event/event_mer.html">商品一覧</a></li>
+            <li><a href="${rootPath}event/event_exp.html">体験一覧</a></li>
+            <li><a href="${rootPath}event/article.html">記事一覧</a></li>
+            <li><a href="${rootPath}chat.html">お問い合わせ</a></li>
+            <hr>
+            <li><a href="${rootPath}login.html">ログイン</a></li>
+        `;
+    }
+
+    menuList.innerHTML = menuItemsHTML;
+
+    // メニューを開くクリックイベント
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+    });
+
+    // ログアウト処理
+    const logoutLink = document.getElementById('logout-link');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            sessionStorage.removeItem('loggedInUser');
+            alert('ログアウトしました。');
+            window.location.href = `${rootPath}login.html`;
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setupHamburgerMenu);
