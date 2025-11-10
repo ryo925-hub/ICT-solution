@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レビューを投稿する</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* レビュー対象商品の表示エリア */
+        .product-info {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .product-info img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+        .product-info h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        /* フォーム (style.cssの共通スタイルを使用) */
+        .review-form {
+            text-align: left;
+        }
+
+        /* 星評価 (★) のための簡単なCSS */
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse; /* 星を右から左に並べる(CSSテクニック) */
+            justify-content: flex-end;
+            font-size: 2rem;
+        }
+        .star-rating input[type="radio"] {
+            display: none; /* ラジオボタン本体は隠す */
+        }
+        .star-rating label {
+            color: #ccc; /* デフォルトの星の色 */
+            cursor: pointer;
+            padding: 0 0.1em;
+            transition: color 0.2s;
+        }
+        /* ホバー時または選択時 (~) に色を付ける */
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f5c518; /* 選択・ホバー時の星の色 (黄色) */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div id="menu-toggle" class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav id="nav-menu" class="nav">
+          <ul></ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 style="color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5em;">レビューを投稿する</h1>
+
+            <div class="product-info">
+                <img src="https://via.placeholder.com/100x100.png?text=商品画像" alt="商品画像" id="product-image">
+                <h3 id="product-name">（商品名がここに表示されます）</h3>
+            </div>
+            
+            <form id="review-form" class="review-form">
+                
+                <div class="input-group">
+                    <label for="rating">総合評価</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="review-title">件名</label>
+                    <input type="text" id="review-title" placeholder="（例）とても良い体験でした">
+                </div>
+
+                <div class="input-group">
+                    <label for="review-comment">コメント</label>
+                    <textarea id="review-comment" rows="6" placeholder="商品の感想や体験の様子などを自由にご記入ください。"></textarea>
+                </div>
+
+                <button type="submit">レビューを投稿する</button>
+            </form>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+      <div class="copyright">コピーライト表記</div>
+    </footer>
+    
+    <script type="module" src="humbarger.js" data-root="./"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // URLから商品IDを取得 (例: ?product_id=P001)
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('product_id');
+
+            // ダミーの商品情報を設定
+            const dummyProducts = {
+                'P001': { name: '竹細工体験 (2名様)', image: 'https://via.placeholder.com/100x100.png?text=Takezaiku' },
+                'P002': { name: '竹箸セット (桐箱入り)', image: 'https://via.placeholder.com/100x100.png?text=Hashi' },
+                'P003': { name: '竹灯り体験', image: 'https://via.placeholder.com/100x100.png?text=Takeakari' }
+            };
+
+            const product = dummyProducts[productId] || { name: '不明な商品', image: 'https://via.placeholder.com/100x100.png?text=?' };
+            
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-image').src = product.image;
+        });
+
+        // フォーム送信のシミュレーション
+        document.getElementById('review-form').addEventListener('submit', (e) => {
+            e.preventDefault(); // 実際の送信を停止
+            
+            const rating = document.querySelector('input[name="rating"]:checked');
+            if (!rating) {
+                alert('総合評価を選択してください。');
+                return;
+            }
+            
+            alert('レビューを投稿しました！ (シミュレーションです)\n\n評価: ★' + rating.value);
+            
+            // 投稿後は購入履歴ページに戻る
+            window.location.href = 'purchase_history.html';
+        });
+    </script>
+</body>
+</html>

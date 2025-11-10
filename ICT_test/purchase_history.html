@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購入履歴</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 2em; }
+        th, td { border: 1px solid var(--border-color); padding: 12px; text-align: left; vertical-align: middle; }
+        th { background-color: var(--secondary-color); font-weight: bold; }
+        tbody tr:nth-child(even) { background-color: var(--secondary-color); }
+        .item-name { font-weight: bold; color: #333; }
+        .item-price { text-align: right; width: 120px; font-weight: bold; }
+        .item-status { text-align: center; width: 100px; }
+        .status-badge { padding: 0.3em 0.6em; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
+        .status-shipped { background-color: #e0f2f1; color: #00796b; }
+        .back-link { display: inline-block; margin-top: 2rem; text-decoration: none; color: var(--primary-color); font-weight: bold; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* ★修正点1: レビューボタンの色を鮮やかな緑に変更 */
+        .review-button {
+            display: inline-block;
+            padding: 0.5em 1em;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50; /* 鮮やかな緑 */
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            width: auto; 
+        }
+        /* ★修正点2: ホバー時の色も連動して変更 */
+        .review-button:hover {
+            background-color: #45a049; /* 少し濃い緑 */
+        }
+        .action-cell {
+            width: 120px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div id="menu-toggle" class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav id="nav-menu" class="nav">
+          <ul></ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 style="color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5em;">購入履歴</h1>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>購入日</th>
+                        <th>商品名</th>
+                        <th>金額 (税込)</th>
+                        <th>ステータス</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="history-list">
+                    <tr>
+                        <td>2025/11/01</td>
+                        <td class="item-name">竹細工体験 (2名様)</td>
+                        <td class="item-price">¥6,000</td>
+                        <td class="item-status">
+                            <span class="status-badge status-shipped">完了</span>
+                        </td>
+                        <td class="action-cell">
+                            <a href="review_post.html?product_id=P001" class="review-button">レビューを書く</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2025/10/20</td>
+                        <td class="item-name">竹箸セット (桐箱入り)</td>
+                        <td class="item-price">¥1,200</td>
+                        <td class="item-status">
+                            <span class="status-badge status-shipped">完了</span>
+                        </td>
+                        <td class="action-cell">
+                            <a href="review_post.html?product_id=P002" class="review-button">レビューを書く</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2025/10/15</td>
+                        <td class="item-name">竹灯り体験</td>
+                        <td class="item-price">¥4,500</td>
+                        <td class="item-status">
+                            <span class="status-badge status-shipped">完了</span>
+                        </td>
+                        <td class="action-cell">
+                            <a href="review_post.html?product_id=P003" class="review-button">レビューを書く</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="mypage.html" class="back-link">← マイページに戻る</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+      <div class="copyright">コピーライト表記</div>
+    </footer>
+    
+    <script type="module" src="humbarger.js" data-root="./"></script>
+
+</body>
+</html>
