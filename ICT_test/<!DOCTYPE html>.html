@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マイページ</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* マイページ専用のスタイル調整 (style.cssに追記してもOK) */
+    .mypage-main {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .welcome-message {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      font-weight: bold;
+      color: #333; /* メインカラーに合わせて調整 */
+    }
+
+    .mypage-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mypage-button {
+      background-color: #4CAF50; /* CTAボタンの色を流用またはメインカラーに合わせる */
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none; /* <a>タグの場合 */
+      transition: background-color 0.3s ease;
+      display: block; /* <a>タグをブロック要素にする */
+    }
+
+    .mypage-button:hover {
+      background-color: #02a007;
+    }
+
+    .back-home {
+      margin-top: 40px;
+    }
+
+    .logout-button {
+      background-color: #dc3545; /* ログアウトは区別できるように赤系 */
+    }
+
+    .logout-button:hover {
+      background-color: #c82333;
+    }
+
+    /* index.htmlのメインビジュアルの高さと重複しないように調整 */
+    @media (max-width: 768px) {
+      .mypage-main {
+        padding-top: 100px; /* ヘッダーの高さに応じて調整 */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div id="menu-toggle" class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav id="nav-menu" class="nav">
+      <ul></ul>
+    </nav>
+  </header>
+
+  <section class="mypage-main">
+    <h1 class="welcome-message">
+      マイページへようこそ
+    </h1>
+
+    <div class="mypage-buttons">
+      <a href="information.html" class="mypage-button">個人情報修正</a>
+      <a href="event/eventResister.html" class="mypage-button">イベント・商品登録</a>
+    </div>
+    
+    <div class="mypage-buttons back-home">
+      <a href="index.html" class="mypage-button">ホームページに戻る</a>
+      <a href="logout.html" class="mypage-button logout-button">ログアウト</a>
+    </div>
+  </section>
+
+  <script type="module" src="humbarger.js" data-root="./"></script>
+  </body>
+</html>
