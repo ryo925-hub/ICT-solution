@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ホームページ</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <style>
+    /* 💡 1. メインビジュアルの親要素 */
+    .main-visual {
+      /* 背景画像をフルサイズで表示（余白なし） */
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat;
+      
+      min-height: 400px; 
+      position: relative; 
+      background-image: url('image/winter.jpg'); 
+
+      /* ロゴと文字（.main-visual-text）を配置するための設定 */
+      display: flex;
+      justify-content: center; /* 水平中央 */
+      align-items: flex-start; /* 👈 修正: 垂直上端に配置 */
+      padding: 20px 0; /* 上下のパディングで写真の上にスペースを確保 */
+    }
+    
+    /* 💡 2. ロゴと文字を含むコンテナ（写真の上部に重ねて配置される） */
+    .main-visual-text {
+      width: 100%; /* 全幅を使用 */
+      text-align: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+
+      /* ロゴと文字が背景写真の上に浮かぶように調整 */
+      position: absolute; /* 親要素 .main-visual に対して絶対配置 */
+      top: 0;
+      left: 0;
+      padding: 20px;
+      
+      /* ロゴと文字の視認性向上のための背景（任意。背景を透けさせたい場合は削除） */
+      background-color: rgba(255, 255, 255, 0.7); /* 白の半透明で視認性向上 */
+    }
+    
+    .main-visual-text h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* 👈 中央揃え */
+      margin: 0;
+      font-size: 2em; 
+    }
+
+    /* 💡 3. 文字色を#268629に変更 */
+    .main-visual-text h1 span {
+      color: #268629; /* 👈 修正: 新しい緑色 */
+      font-weight: bold;
+      font-family: cursive;
+    }
+
+    .site-logo {
+      height: 40px; 
+      margin-right: 10px; 
+    }
+
+    /* 💡 以前のブランディングバーのスタイルは不要になったため削除（または無効化） */
+    /* .branding-bar { ... } */
+
+    /* 💡 メインビジュアルの下の背景を薄い緑色に設定（以前の設定を維持） */
+    .features, .recommendations, .voices, .cta {
+        background-color: #E8F5E9; 
+        padding: 40px 20px; 
+    }
+
+    /* 💡 サービスの特徴セクションのスタイル（以前の設定を維持） */
+    .feature-list {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .feature-item {
+      text-align: center;
+      flex-basis: 30%; 
+    }
+    .feature-image-container {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 15px; 
+      overflow: hidden; 
+      border-radius: 50%; 
+      border: 5px solid #4CAF50; 
+    }
+    .feature-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+    }
+    .feature-item p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div id="menu-toggle" class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav id="nav-menu" class="nav">
+      <ul></ul>
+    </nav>
+  </header>
+  
+  <section class="main-visual">
+    <div class="main-visual-text">
+      <h1>
+        <img src="image/logo.png" alt="竹結いのロゴ" class="site-logo">
+        <span>竹結い</span>
+      </h1>
+    </div>
+  </section>
+
+  <script type="module" src="humbarger.js" data-root="./"></script>
+
+  <section class="features">
+    <h2>竹結いの特徴</h2>
+    <div class="feature-list">
+      
+      <div class="feature-item">
+        <div class="feature-image-container">
+          <img src="image/touch.png" alt="特徴1のイメージ" class="feature-image">
+        </div>
+        <p>竹に触れる<br>竹林所有者が竹林を体験の場として提供することで、利用者が楽しめるようなイベントを私たちが企画運営し多くの人に竹と触れ合う機会を提供します。</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-image-container">
+          <img src="image/buy.png" alt="特徴2のイメージ" class="feature-image">
+        </div>
+        <p>竹を買う・売る<br>伐採された竹や筍、クリエイターが製作した竹製品を利用者との間で売買できる場を提供します。</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-image-container">
+          <img src="image/com.png" alt="特徴3のイメージ" class="feature-image">
+        </div>
+        <p>竹でつながる<br>体験レポートやレビュー、DIYのアイデアなどを共有できる機能を設け、ユーザー間で交流できる場を提供します。</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="recommendations">
+    <h2>おすすめの体験</h2>
+    <div id="event-list" class="event-list">
+      </div>
+  </section>
+
+  <section class="voices">
+    <h2>お客様の声</h2>
+    <div class="voice-list">
+      <div class="voice-item">"ここにコメントが入ります..." - 利用者名</div>
+      <div class="voice-item">"ここにコメントが入ります..." - 利用者名</div>
+      <div class="voice-item">"ここにコメントが入ります..." - 利用者名</div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>行動喚起（CTA）セクション</h2>
+    <p>ユーザーへのメッセージをここに記述します。</p>
+    <button class="cta-button">登録はこちら</button>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <p>ロゴ</p>
+        <p>サイトの概要説明</p>
+      </div>
+      <div class="footer-menu">
+        <div>
+          <h4>フッターメニュー1</h4>
+          <ul><li><a href="#">リンク</a></li><li><a href="#">リンク</a></li></ul>
+        </div>
+        <div>
+          <h4>フッターメニュー2</h4>
+          <ul><li><a href="#">リンク</a></li><li><a href="#">リンク</a></li></ul>
+        </div>
+        <div>
+          <h4>フッターメニュー3</h4>
+          <ul><li><a href="#">リンク</a></li><li><a href="#">リンク</a></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">コピーライト表記</div>
+  </footer>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="close-modal" class="close">&times;</span>
+      <img id="modal-image" src="" alt="">
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+    </div>
+  </div>
+
+  <script src="event/event_card.js"></script>
+</body>
+</html>
