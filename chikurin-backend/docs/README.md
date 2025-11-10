@@ -28,6 +28,12 @@
 - Login
     - [Login](#/Login/Login)
     - [Regist](#/Login/Regist)
+    - [UpdateProfile](#/Login/UpdateProfile)
+- item
+    - [Add item(regist item)](#/item/AddItem)
+    - [DeleteItem](#/item/DeleteItem)
+    - [GetItems](#/item/GetItems)
+    - [UpdateItem](#/item/UpdateItem)
 - [test AddData](#/AddData)
 - [test GetData](#/GetData)
 - [This is a test request to upload an image.](#/UploadImageTest)
@@ -605,6 +611,151 @@ interface ReqRegist {
 ```ts
 interface ResRegist {
 
+}
+```
+
+---
+
+### UpdateProfile <a id="/Login/UpdateProfile"></a>
+
+**url**
+ `/Login/UpdateProfile`
+
+**request**
+```ts
+interface ReqUpdateProfile {
+    firstName1: string,
+    lastName1: string,
+    firstName2: string,
+    lastName2: string,
+    birthday: /*datetime*/ string,
+    mailAddress: string,
+    password: string,
+    gender: string,
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResUpdateProfile {
+
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+## item
+
+### Add item(regist item) <a id="/item/AddItem"></a>
+
+**url**
+ `/item/AddItem`
+
+**request**
+```ts
+interface ReqAddItem {
+    __token?: string,
+    name: string,
+    owner: /*ObjectId*/ string
+}
+```
+
+**response**
+```ts
+interface ResAddItem {
+
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### DeleteItem <a id="/item/DeleteItem"></a>
+
+**url**
+ `/item/DeleteItem`
+
+**request**
+```ts
+interface ReqDeleteItem {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResDeleteItem {
+
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
+
+### GetItems <a id="/item/GetItems"></a>
+
+**url**
+ `/item/GetItems`
+
+**request**
+```ts
+interface ReqGetItems {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetItems {
+
+}
+```
+
+---
+
+### UpdateItem <a id="/item/UpdateItem"></a>
+
+**url**
+ `/item/UpdateItem`
+
+**request**
+```ts
+interface ReqUpdateItem {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResUpdateItem {
+
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
 }
 ```
 

@@ -29,7 +29,7 @@ export default async function (call: ApiCall<ReqUpdateChikurin, ResUpdateChikuri
         await Promise.all(promises);
     }
     delete call.req.images;
-
+    delete call.req.__token;
 
     const ret = await Global.collection('chikurin').updateOne({
         owner: call.currentUser._id,

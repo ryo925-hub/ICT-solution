@@ -29,6 +29,7 @@ export default async function (call: ApiCall<ReqAddChikurin, ResAddChikurin>) {
         await Promise.all(promises);
     }
     delete call.req.images;
+    delete call.req.__token;
 
     const res = await Global.collection('chikurin').insertOne({
         ...call.req,

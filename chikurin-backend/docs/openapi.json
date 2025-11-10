@@ -663,6 +663,194 @@
         }
       }
     },
+    "/item/AddItem": {
+      "post": {
+        "tags": [
+          "item"
+        ],
+        "operationId": "item/AddItem",
+        "requestBody": {
+          "description": "Req<AddItem>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/item_PtlAddItem_ReqAddItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResAddItem>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/item_PtlAddItem_ResAddItem"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/item/DeleteItem": {
+      "post": {
+        "tags": [
+          "item"
+        ],
+        "operationId": "item/DeleteItem",
+        "requestBody": {
+          "description": "Req<DeleteItem>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/item_PtlDeleteItem_ReqDeleteItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResDeleteItem>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/item_PtlDeleteItem_ResDeleteItem"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/item/GetItems": {
+      "post": {
+        "tags": [
+          "item"
+        ],
+        "operationId": "item/GetItems",
+        "requestBody": {
+          "description": "Req<GetItems>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/item_PtlGetItems_ReqGetItems"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetItems>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/item_PtlGetItems_ResGetItems"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/item/UpdateItem": {
+      "post": {
+        "tags": [
+          "item"
+        ],
+        "operationId": "item/UpdateItem",
+        "requestBody": {
+          "description": "Req<UpdateItem>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/item_PtlUpdateItem_ReqUpdateItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResUpdateItem>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/item_PtlUpdateItem_ResUpdateItem"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/Login/Login": {
       "post": {
         "tags": [
@@ -744,6 +932,53 @@
                     },
                     "res": {
                       "$ref": "#/components/schemas/Login_PtlRegist_ResRegist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Login/UpdateProfile": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "Login/UpdateProfile",
+        "requestBody": {
+          "description": "Req<UpdateProfile>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login_PtlUpdateProfile_ReqUpdateProfile"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResUpdateProfile>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Login_PtlUpdateProfile_ResUpdateProfile"
                     }
                   }
                 }
@@ -1610,6 +1845,129 @@
           }
         ]
       },
+      "item_PtlAddItem_ReqAddItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "owner": {
+                "$ref": "#/components/schemas/?mongodb_ObjectId"
+              }
+            },
+            "required": [
+              "name",
+              "owner"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ],
+        "description": "Add item(regist item)"
+      },
+      "___entities_item_item": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/?mongodb_ObjectId"
+          }
+        },
+        "required": [
+          "_id",
+          "name",
+          "owner"
+        ]
+      },
+      "item_PtlAddItem_ResAddItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "item_PtlDeleteItem_ReqDeleteItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "item_PtlDeleteItem_ResDeleteItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "item_PtlGetItems_ReqGetItems": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "item_PtlGetItems_ResGetItems": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "item_PtlUpdateItem_ReqUpdateItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "item_PtlUpdateItem_ResUpdateItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
       "Login_PtlLogin_ReqLogin": {
         "allOf": [
           {
@@ -1746,6 +2104,64 @@
         ]
       },
       "Login_PtlRegist_ResRegist": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "Login_PtlUpdateProfile_ReqUpdateProfile": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "firstName1": {
+                "type": "string"
+              },
+              "lastName1": {
+                "type": "string"
+              },
+              "firstName2": {
+                "type": "string"
+              },
+              "lastName2": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "mailAddress": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "gender": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "firstName1",
+              "lastName1",
+              "firstName2",
+              "lastName2",
+              "birthday",
+              "mailAddress",
+              "password",
+              "gender"
+            ]
+          }
+        ]
+      },
+      "Login_PtlUpdateProfile_ResUpdateProfile": {
         "allOf": [
           {
             "$ref": "#/components/schemas/base_BaseResponse"

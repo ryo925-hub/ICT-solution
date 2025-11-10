@@ -13,8 +13,13 @@ import { ReqGetEventsHosting, ResGetEventsHosting } from './Event/PtlGetEventsHo
 import { ReqGetJointEvents, ResGetJointEvents } from './Event/PtlGetJointEvents';
 import { ReqJoinEvent, ResJoinEvent } from './Event/PtlJoinEvent';
 import { ReqUnjoinEvent, ResUnjoinEvent } from './Event/PtlUnjoinEvent';
+import { ReqAddItem, ResAddItem } from './item/PtlAddItem';
+import { ReqDeleteItem, ResDeleteItem } from './item/PtlDeleteItem';
+import { ReqGetItems, ResGetItems } from './item/PtlGetItems';
+import { ReqUpdateItem, ResUpdateItem } from './item/PtlUpdateItem';
 import { ReqLogin, ResLogin } from './Login/PtlLogin';
 import { ReqRegist, ResRegist } from './Login/PtlRegist';
+import { ReqUpdateProfile, ResUpdateProfile } from './Login/PtlUpdateProfile';
 import { MsgChat } from './MsgChat';
 import { MsgTest } from './MsgTest';
 import { ReqAddData, ResAddData } from './PtlAddData';
@@ -79,6 +84,22 @@ export interface ServiceType {
             req: ReqUnjoinEvent,
             res: ResUnjoinEvent
         },
+        "item/AddItem": {
+            req: ReqAddItem,
+            res: ResAddItem
+        },
+        "item/DeleteItem": {
+            req: ReqDeleteItem,
+            res: ResDeleteItem
+        },
+        "item/GetItems": {
+            req: ReqGetItems,
+            res: ResGetItems
+        },
+        "item/UpdateItem": {
+            req: ReqUpdateItem,
+            res: ResUpdateItem
+        },
         "Login/Login": {
             req: ReqLogin,
             res: ResLogin
@@ -86,6 +107,10 @@ export interface ServiceType {
         "Login/Regist": {
             req: ReqRegist,
             res: ResRegist
+        },
+        "Login/UpdateProfile": {
+            req: ReqUpdateProfile,
+            res: ResUpdateProfile
         },
         "AddData": {
             req: ReqAddData,
@@ -107,7 +132,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 18,
+    "version": 19,
     "services": [
         {
             "id": 10,
@@ -222,6 +247,36 @@ export const serviceProto: ServiceProto<ServiceType> = {
             }
         },
         {
+            "id": 21,
+            "name": "item/AddItem",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 22,
+            "name": "item/DeleteItem",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
+            "id": 23,
+            "name": "item/GetItems",
+            "type": "api",
+            "conf": {}
+        },
+        {
+            "id": 24,
+            "name": "item/UpdateItem",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
+        },
+        {
             "id": 4,
             "name": "Login/Login",
             "type": "api",
@@ -232,6 +287,14 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "name": "Login/Regist",
             "type": "api",
             "conf": {}
+        },
+        {
+            "id": 25,
+            "name": "Login/UpdateProfile",
+            "type": "api",
+            "conf": {
+                "needLogin": true
+            }
         },
         {
             "id": 2,
@@ -1069,6 +1132,143 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
+        "item/PtlAddItem/ReqAddItem": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                },
+                {
+                    "id": 1,
+                    "type": {
+                        "target": {
+                            "type": "Reference",
+                            "target": "../entities/item/item"
+                        },
+                        "keys": [
+                            "_id"
+                        ],
+                        "type": "Omit"
+                    }
+                }
+            ]
+        },
+        "../entities/item/item": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "_id",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "owner",
+                    "type": {
+                        "type": "Reference",
+                        "target": "?mongodb/ObjectId"
+                    }
+                }
+            ]
+        },
+        "item/PtlAddItem/ResAddItem": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
+        "item/PtlDeleteItem/ReqDeleteItem": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "item/PtlDeleteItem/ResDeleteItem": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
+        "item/PtlGetItems/ReqGetItems": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "item/PtlGetItems/ResGetItems": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
+        "item/PtlUpdateItem/ReqUpdateItem": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "item/PtlUpdateItem/ResUpdateItem": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
         "Login/PtlLogin/ReqLogin": {
             "type": "Interface",
             "extends": [
@@ -1266,6 +1466,88 @@ export const serviceProto: ServiceProto<ServiceType> = {
             ]
         },
         "Login/PtlRegist/ResRegist": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ]
+        },
+        "Login/PtlUpdateProfile/ReqUpdateProfile": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "firstName1",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "lastName1",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "firstName2",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "lastName2",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "birthday",
+                    "type": {
+                        "type": "Date"
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "mailAddress",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 6,
+                    "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 7,
+                    "name": "gender",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "Login/PtlUpdateProfile/ResUpdateProfile": {
             "type": "Interface",
             "extends": [
                 {
