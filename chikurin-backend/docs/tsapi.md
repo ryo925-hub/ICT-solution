@@ -26,6 +26,7 @@
     - [Join event](#/Event/JoinEvent)
     - [Unjoin event](#/Event/UnjoinEvent)
 - Login
+    - [GetUserData](#/Login/GetUserData)
     - [Login](#/Login/Login)
     - [Regist](#/Login/Regist)
     - [UpdateProfile](#/Login/UpdateProfile)
@@ -552,6 +553,44 @@ interface ResUnjoinEvent {
 ---
 
 ## Login
+
+### GetUserData <a id="/Login/GetUserData"></a>
+
+**url**
+ `/Login/GetUserData`
+
+**request**
+```ts
+interface ReqGetUserData {
+    __token?: string
+}
+```
+
+**response**
+```ts
+interface ResGetUserData {
+    user: {
+        _id: /*ObjectId*/ string,
+        firstName1: string,
+        lastName1: string,
+        firstName2: string,
+        lastName2: string,
+        birthday: /*datetime*/ string,
+        mailAddress: string,
+        password: string,
+        gender: string
+    }
+}
+```
+
+**配置**
+```ts
+{
+  "needLogin": true
+}
+```
+
+---
 
 ### Login <a id="/Login/Login"></a>
 

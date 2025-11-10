@@ -851,6 +851,53 @@
         }
       }
     },
+    "/Login/GetUserData": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "Login/GetUserData",
+        "requestBody": {
+          "description": "Req<GetUserData>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login_PtlGetUserData_ReqGetUserData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "ApiReturn<ResGetUserData>",
+                  "properties": {
+                    "isSucc": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "default": true
+                    },
+                    "res": {
+                      "$ref": "#/components/schemas/Login_PtlGetUserData_ResGetUserData"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/Login/Login": {
       "post": {
         "tags": [
@@ -1968,29 +2015,18 @@
           }
         ]
       },
-      "Login_PtlLogin_ReqLogin": {
+      "Login_PtlGetUserData_ReqGetUserData": {
         "allOf": [
           {
             "$ref": "#/components/schemas/base_BaseRequest"
           },
           {
             "type": "object",
-            "properties": {
-              "loginID": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "loginID",
-              "password"
-            ]
+            "properties": {}
           }
         ]
       },
-      "Login_PtlLogin_ResLogin": {
+      "Login_PtlGetUserData_ResGetUserData": {
         "allOf": [
           {
             "$ref": "#/components/schemas/base_BaseResponse"
@@ -2000,14 +2036,10 @@
             "properties": {
               "user": {
                 "$ref": "#/components/schemas/___entities_user_users"
-              },
-              "token": {
-                "type": "string"
               }
             },
             "required": [
-              "user",
-              "token"
+              "user"
             ]
           }
         ]
@@ -2054,6 +2086,50 @@
           "mailAddress",
           "password",
           "gender"
+        ]
+      },
+      "Login_PtlLogin_ReqLogin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "loginID": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "loginID",
+              "password"
+            ]
+          }
+        ]
+      },
+      "Login_PtlLogin_ResLogin": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/base_BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "user": {
+                "$ref": "#/components/schemas/___entities_user_users"
+              },
+              "token": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "user",
+              "token"
+            ]
+          }
         ]
       },
       "Login_PtlRegist_ReqRegist": {
