@@ -137,7 +137,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 20,
+    "version": 21,
     "services": [
         {
             "id": 10,
@@ -774,7 +774,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
-                    "id": 2,
+                    "id": 3,
                     "type": {
                         "target": {
                             "type": "Reference",
@@ -782,10 +782,53 @@ export const serviceProto: ServiceProto<ServiceType> = {
                         },
                         "keys": [
                             "_id",
-                            "owner"
+                            "owner",
+                            "img"
                         ],
                         "type": "Omit"
                     }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "images",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Interface",
+                            "properties": [
+                                {
+                                    "id": 0,
+                                    "name": "fileName",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "fileData",
+                                    "type": {
+                                        "type": "Interface",
+                                        "indexSignature": {
+                                            "keyType": "Number",
+                                            "type": {
+                                                "type": "Number"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "fileType",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "optional": true
                 }
             ]
         },

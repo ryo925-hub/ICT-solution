@@ -5,8 +5,12 @@ import { BaseRequest, BaseResponse, BaseConf } from "../base";
 /**
  * Add event
  */
-export interface ReqAddEvent extends BaseRequest, Omit<event, "_id" | "owner"> {
-
+export interface ReqAddEvent extends BaseRequest, Omit<event, "_id" | "owner" | "img"> {
+    images?: {
+        fileName: string,
+        fileData: { [index: number]: number },
+        fileType: string,
+    }[]
 }
 
 export interface ResAddEvent extends BaseResponse {

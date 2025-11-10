@@ -1,8 +1,19 @@
-"use strict";
+import createHttpClient from '../../utils/HttpClient.js'
+
+const { sendRequest } = createHttpClient("dev");
+const res = await sendRequest('Login/GetUserData', {});
+if (res.isSucc) {
+    // console.log(res.res.user);
+    window.user = res.res.user;
+}
+else {
+    alert("ログインしてください");
+    window.location.href = "../login.html";
+}
 
 // 擬似的なデータベースとして使用する配列
 // imgプロパティは、後で画像のデータURLを格納するために空にしておきます
-const items = [
+let items = [
     { name: "竹細工体験", category: "体験", area: "関東", price: 3000, img: "https://via.placeholder.com/300x200.png?text=Takezaiku" },
     { name: "竹箸セット", category: "竹材", area: "関西", price: 1200, img: "https://via.placeholder.com/300x200.png?text=Hashi" },
     { name: "竹灯り体験", category: "体験", area: "九州", price: 4500, img: "https://via.placeholder.com/300x200.png?text=Takeakari" },
@@ -34,31 +45,31 @@ imageInput.addEventListener('change', (event) => {
     }
 });
 
-// フォーム送信時の処理
-form.addEventListener('submit', (event) => {
-    // デフォルトのフォーム送信をキャンセル
-    event.preventDefault();
+// // フォーム送信時の処理
+// form.addEventListener('submit', (event) => {
+//     // デフォルトのフォーム送信をキャンセル
+//     event.preventDefault();
 
-    // 新しいアイテムのオブジェクトを作成
-    const newItem = {
-        name: nameInput.value,
-        category: categorySelect.value,
-        area: areaSelect.value,
-        price: parseInt(priceInput.value),
-        // プレビューに表示されている画像(データURL)を取得。なければ空文字。
-        img: imagePreview.src.startsWith('data:') ? imagePreview.src : ''
-    };
+//     // 新しいアイテムのオブジェクトを作成
+//     const newItem = {
+//         name: nameInput.value,
+//         category: categorySelect.value,
+//         area: areaSelect.value,
+//         price: parseInt(priceInput.value),
+//         // プレビューに表示されている画像(データURL)を取得。なければ空文字。
+//         img: imagePreview.src.startsWith('data:') ? imagePreview.src : ''
+//     };
 
-    // 配列（データベース）に新しいアイテムを追加
-    items.push(newItem);
+//     // 配列（データベース）に新しいアイテムを追加
+//     items.push(newItem);
 
-    // フォームをリセット
-    form.reset();
-    resetPreview();
+//     // フォームをリセット
+//     form.reset();
+//     resetPreview();
 
-    // 一覧を再描画
-    renderItems();
-});
+//     // 一覧を再描画
+//     renderItems();
+// });
 
 
 /**
@@ -99,3 +110,49 @@ function renderItems() {
 
 // 初期表示のために、ページ読み込み時に一度実行する
 document.addEventListener('DOMContentLoaded', renderItems);
+
+//ここから追加
+
+
+//<input type="file">
+const fileInput = document.querySelector('#image-input');
+//button
+const uploadBtn = document.querySelector('#upload-btn');
+
+button.addEventListener('click', async () => {
+    const imageDatas = new Array
+    //画像本体
+    const files = fileInput.files;
+
+    //画像をimageDatasに格納
+    for (let i = 0; i < files.length; i++) {
+        const file = files.item(i);
+        imageDatas.push({
+            fileName: file.name,
+            fileType: file.type,
+            fileData: new Uint8Array(await file.arrayBuffer()),
+        })
+    }
+    // console.log(imageDatas[0].fileData instanceof Uint8Array);
+
+    console.log(priceInput.value);
+    
+    //requestする
+    const res = await sendRequest('Event/AddEvent', {
+        images: imageDatas,
+        name: nameInput.value,
+        category: categorySelect.value,
+        area: areaSelect.value,
+        price: parseFloat(priceInput.value),
+        description: previewText.value || '',
+        startTime: new Date(),
+        endTime: new Date(),
+    })
+
+    if (res.isSucc) {
+        console.log(res.res.imageUrls);
+    }
+    else {
+        console.log(res.err);
+    }
+})

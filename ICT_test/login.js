@@ -12,6 +12,8 @@ const { sendRequest } = createHttpClient('dev');
 //     password: "password",
 // })
 
+button.addEventListener('click', login)
+
 
 async function login() {
     const loginId = document.getElementById('loginId').value;
@@ -26,5 +28,8 @@ async function login() {
         console.log(res.res.token);
         localStorage.setItem('token', res.res.token);
         window.location.href = 'index.html';
+    }
+    else{
+        console.log(res.err);
     }
 }

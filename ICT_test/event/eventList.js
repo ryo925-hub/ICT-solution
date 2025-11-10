@@ -1,8 +1,11 @@
 //import createWsClient from './utils/WsClient.js';
 //import createHttpClient from './utils/HttpClient.js';
+import createHttpClient from "../../utils/HttpClient.js";
+
+const { sendRequest } = createHttpClient('dev');
 
 // ▼▼▼ 変更点1: 各データにIDと詳細説明を追加 ▼▼▼
-const items = [
+let items = [
   { id: 1, name: "竹細工体験", category: "体験", area: "関東", price: 3000, img: "", description: "熟練の職人が教える、本格的な竹細工体験。世界に一つだけのオリジナル作品を作ってみませんか？" },
   { id: 2, name: "竹箸セット", category: "竹材", area: "関西", price: 1200, img: "", description: "しなやかで使いやすい竹箸の5膳セット。食卓に自然の温もりを添えます。" },
   { id: 3, name: "竹灯り体験", category: "体験", area: "九州", price: 4500, img: "", description: "幻想的な竹灯りを作るワークショップ。竹に穴を開けて、美しい光のアートを創造します。" },
@@ -14,6 +17,16 @@ const items = [
   { id: 9, name: "竹粉せっけん", category: "食品", area: "九州", price: 900, img: "", description: "竹の微粒子パウダーを配合した自然派せっけん。すべすべの洗い上がりが特徴です。" },
   { id: 10, name: "竹風鈴", category: "加工品", area: "関西", price: 1800, img: "", description: "涼やかな音色が心地よい竹の風鈴。夏の暑さを和らげてくれます。" }
 ];
+
+const ret = await sendRequest('Event/GetEvents')
+if(ret.isSucc){
+  console.log(ret.res);
+  items = ret.res.events
+  //http://127.0.0.1:5500/chikurin-backend/uploads
+}
+else{
+  alert(ret.err.message)
+}
 
 let currentPage = 1;
 const itemsPerPage = 6;
@@ -50,7 +63,7 @@ function renderItems() {
   // ▼▼▼ 変更点3: 表示するHTMLをシンプルに。data-idを付与 ▼▼▼
   itemList.innerHTML = paginated.map(i => `
     <div class="item" data-id="${i.id}">
-      <img src="${i.img || 'https://via.placeholder.com/220x140?text=Image'}" alt="${i.name}">
+      <img src="${'http://127.0.0.1:5500/chikurin-backend/uploads' + i.img || 'https://via.placeholder.com/220x140?text=Image'}" alt="${i.name}">
       <h4>${i.name}</h4>
       <p>${i.category}</p>
       <p>¥${i.price.toLocaleString()}</p>
