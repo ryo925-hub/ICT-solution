@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
   <style>
-    /* 💡 1. メインビジュアルの親要素 */
     .main-visual {
       /* 背景画像をフルサイズで表示（余白なし） */
       background-size: cover; 
@@ -21,11 +20,10 @@
       /* ロゴと文字（.main-visual-text）を配置するための設定 */
       display: flex;
       justify-content: center; /* 水平中央 */
-      align-items: flex-start; /* 👈 修正: 垂直上端に配置 */
+      align-items: flex-start; 
       padding: 20px 0; /* 上下のパディングで写真の上にスペースを確保 */
     }
     
-    /* 💡 2. ロゴと文字を含むコンテナ（写真の上部に重ねて配置される） */
     .main-visual-text {
       width: 100%; /* 全幅を使用 */
       text-align: center;
@@ -45,14 +43,13 @@
     .main-visual-text h1 {
       display: flex;
       align-items: center;
-      justify-content: center; /* 👈 中央揃え */
+      justify-content: center;
       margin: 0;
       font-size: 2em; 
     }
 
-    /* 💡 3. 文字色を#268629に変更 */
     .main-visual-text h1 span {
-      color: #268629; /* 👈 修正: 新しい緑色 */
+      color: #268629; 
       font-weight: bold;
       font-family: cursive;
     }
@@ -62,16 +59,11 @@
       margin-right: 10px; 
     }
 
-    /* 💡 以前のブランディングバーのスタイルは不要になったため削除（または無効化） */
-    /* .branding-bar { ... } */
-
-    /* 💡 メインビジュアルの下の背景を薄い緑色に設定（以前の設定を維持） */
     .features, .recommendations, .voices, .cta {
         background-color: #E8F5E9; 
         padding: 40px 20px; 
     }
 
-    /* 💡 サービスの特徴セクションのスタイル（以前の設定を維持） */
     .feature-list {
       display: flex;
       justify-content: space-around;
