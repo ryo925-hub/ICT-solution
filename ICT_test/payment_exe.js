@@ -35,5 +35,5 @@ payBtn.addEventListener('click', () => {
 
 homeBtn.addEventListener('click', () => {
   // ここで戻り先を設定（例：トップページや別のHTML）
-  window.location.href = "index.html"; // 必要なら "home.html" に変更可
+  window.location.href = "event/event_exp.html"; // 必要なら "home.html" に変更可
 });

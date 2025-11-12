@@ -32,18 +32,18 @@ const previewText = document.getElementById('preview-text');
 const itemListContainer = document.getElementById('item-list');
 
 // 画像プレビュー機能
-imageInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imagePreview.src = e.target.result;
-            imagePreview.style.display = 'block';
-            previewText.style.display = 'none';
-        };
-        reader.readAsDataURL(file);
-    }
-});
+// imageInput.addEventListener('change', (event) => {
+//     const file = event.target.files[0];
+//     if (file) {
+//         const reader = new FileReader();
+//         reader.onload = (e) => {
+//             imagePreview.src = e.target.result;
+//             imagePreview.style.display = 'block';
+//             previewText.style.display = 'none';
+//         };
+//         reader.readAsDataURL(file);
+//     }
+// });
 
 // // フォーム送信時の処理
 // form.addEventListener('submit', (event) => {
@@ -109,7 +109,7 @@ function renderItems() {
 }
 
 // 初期表示のために、ページ読み込み時に一度実行する
-document.addEventListener('DOMContentLoaded', renderItems);
+// document.addEventListener('DOMContentLoaded', renderItems);
 
 //ここから追加
 
@@ -120,6 +120,7 @@ const fileInput = document.querySelector('#image-input');
 const uploadBtn = document.querySelector('#upload-btn');
 
 button.addEventListener('click', async () => {
+    
     const imageDatas = new Array
     //画像本体
     const files = fileInput.files;
@@ -136,7 +137,6 @@ button.addEventListener('click', async () => {
     // console.log(imageDatas[0].fileData instanceof Uint8Array);
 
     console.log(priceInput.value);
-    
     //requestする
     const res = await sendRequest('Event/AddEvent', {
         images: imageDatas,
@@ -151,6 +151,7 @@ button.addEventListener('click', async () => {
 
     if (res.isSucc) {
         console.log(res.res.imageUrls);
+        alert('登録しました');
     }
     else {
         console.log(res.err);

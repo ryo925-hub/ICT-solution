@@ -19,12 +19,12 @@ let items = [
 ];
 
 const ret = await sendRequest('Event/GetEvents')
-if(ret.isSucc){
+if (ret.isSucc) {
   console.log(ret.res);
   items = ret.res.events
   //http://127.0.0.1:5500/chikurin-backend/uploads
 }
-else{
+else {
   alert(ret.err.message)
 }
 
@@ -62,7 +62,7 @@ function renderItems() {
 
   // ▼▼▼ 変更点3: 表示するHTMLをシンプルに。data-idを付与 ▼▼▼
   itemList.innerHTML = paginated.map(i => `
-    <div class="item" data-id="${i.id}">
+    <div class="item" data-id="${i._id}">
       <img src="${'http://127.0.0.1:5500/chikurin-backend/uploads' + i.img || 'https://via.placeholder.com/220x140?text=Image'}" alt="${i.name}">
       <h4>${i.name}</h4>
       <p>${i.category}</p>
@@ -78,7 +78,7 @@ function renderItems() {
 
 // ▼▼▼ 変更点4: モーダルを開く関数を定義 ▼▼▼
 function openModal(item) {
-  modalImg.src = item.img || 'https://via.placeholder.com/500x250?text=Image';
+  modalImg.src = 'http://127.0.0.1:5500/chikurin-backend/uploads' + item.img || 'https://via.placeholder.com/500x250?text=Image';
   modalImg.alt = item.name;
   modalTitle.textContent = item.name;
   modalCategoryAndArea.textContent = `カテゴリ: ${item.category} / エリア: ${item.area}`;
@@ -100,21 +100,21 @@ function goToPage(page) {
 
 // フィルタリング関連のイベントリスナーは変更なし
 document.getElementById("categoryFilter").addEventListener("click", e => {
-    if (e.target.dataset.category) { filters.category = e.target.dataset.category; currentPage = 1; renderItems(); }
+  if (e.target.dataset.category) { filters.category = e.target.dataset.category; currentPage = 1; renderItems(); }
 });
 document.getElementById("areaFilter").addEventListener("click", e => {
-    if (e.target.dataset.area) { filters.area = e.target.dataset.area; currentPage = 1; renderItems(); }
+  if (e.target.dataset.area) { filters.area = e.target.dataset.area; currentPage = 1; renderItems(); }
 });
 priceSlider.addEventListener("input", e => {
-    filters.maxPrice = parseInt(e.target.value);
-    priceValue.textContent = e.target.value;
-    currentPage = 1;
-    renderItems();
+  filters.maxPrice = parseInt(e.target.value);
+  priceValue.textContent = e.target.value;
+  currentPage = 1;
+  renderItems();
 });
 document.getElementById("searchInput").addEventListener("input", e => {
-    filters.keyword = e.target.value;
-    currentPage = 1;
-    renderItems();
+  filters.keyword = e.target.value;
+  currentPage = 1;
+  renderItems();
 });
 
 
@@ -125,8 +125,10 @@ itemList.addEventListener('click', (e) => {
   if (!clickedItem) return;
 
   const itemId = clickedItem.dataset.id;
-  const selectedItem = items.find(item => item.id == itemId);
-  
+
+  const selectedItem = items.find(item => item._id == itemId);
+
+
   if (selectedItem) {
     openModal(selectedItem);
   }
@@ -152,3 +154,7 @@ modal.addEventListener('click', (e) => {
 
 
 renderItems();
+
+modalPurchaseBtn.addEventListener('click', (e) => { 
+  location.href = '../payment_exe.html'
+})
