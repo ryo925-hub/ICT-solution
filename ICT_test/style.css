@@ -220,8 +220,7 @@ header.header {
    CTA
 -------------------------------- */
 .cta {
-  background: #333;
-  color: white;
+  color: black;
   text-align: center;
   padding: 4rem 2rem;
 }
@@ -255,3 +254,4 @@ header.header {
   margin-top: 2rem;
   font-size: 0.8rem;
 }
+
