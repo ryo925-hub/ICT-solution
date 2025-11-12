@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事一覧</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    .main-visual {
+      /* 背景画像をフルサイズで表示（余白なし） */
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat;
+      
+      min-height: 400px; 
+      position: relative; 
+      background-image: url('/ICT_test/image/winter.jpg'); 
+
+      /* ロゴと文字（.main-visual-text）を配置するための設定 */
+      display: flex;
+      justify-content: center; /* 水平中央 */
+      align-items: flex-start; 
+      padding: 20px 0; /* 上下のパディングで写真の上にスペースを確保 */
+    }
+    
+    .main-visual-text {
+      width: 100%; /* 全幅を使用 */
+      text-align: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+
+      /* ロゴと文字が背景写真の上に浮かぶように調整 */
+      position: absolute; /* 親要素 .main-visual に対して絶対配置 */
+      top: 0;
+      left: 0;
+      padding: 20px;
+      
+      /* ロゴと文字の視認性向上のための背景（任意。背景を透けさせたい場合は削除） */
+      background-color: rgba(255, 255, 255, 0.7); /* 白の半透明で視認性向上 */
+    }
+    
+    .main-visual-text h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      font-size: 2em; 
+    }
+
+    .main-visual-text h1 span {
+      color: #268629; 
+      font-weight: bold;
+      font-family: cursive;
+    }
+
+    .site-logo {
+      height: 40px; 
+      margin-right: 10px; 
+    }
+
+    .features, .recommendations, .voices, .cta {
+        background-color: #E8F5E9; 
+        padding: 40px 20px; 
+    }
+
+    .feature-list {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .feature-item {
+      text-align: center;
+      flex-basis: 30%; 
+    }
+    .feature-image-container {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 15px; 
+      overflow: hidden; 
+      border-radius: 50%; 
+      border: 5px solid #4CAF50; 
+    }
+    .feature-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+    }
+    /* 💡 追加: 特徴のタイトル (h3) のスタイル */
+    .feature-item h3 {
+      font-size: 1.6rem;
+      color: #268629; /* ロゴの緑色と統一 */
+      margin: 15px 0 5px; /* 上部と下部の余白調整 */
+    }
+    /* 💡 追加: 特徴の説明文 (p) のスタイル */
+    .feature-item p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- 🟢 ロゴ削除済みヘッダー -->
+  <header class="header">
+    <!-- ハンバーガー -->
+    <div id="menu-toggle" class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- ハンバーガーメニュー -->
+    <nav id="nav-menu" class="nav">
+      <ul></ul>
+    </nav>
+  </header>
+
+  <section class="main-visual">
+    <div class="main-visual-text">
+      <h1>
+        <img src="/ICT_test/image/logo.png" alt="竹結いのロゴ" class="site-logo">
+        <span>竹結い</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- メニュー内容 -->
+  <script type="module" src="../humbarger.js" data-root="../"></script>
+  <div class="container">
+
+  <!-- おすすめの記事 -->
+  <section class="recommendations">
+    <h2>記事一覧</h2>
+    <h3>おすすめの記事</h3>
+    <div id="event-list" class="event-list">
+      <!-- JSでイベントカードを挿入 -->
+    </div>
+  </section>
+
+  <!-- お客様の声 -->
+  <section class="voices">
+    <h2>お客様の声</h2>
+    <div class="voice-list">
+      <div class="voice-item">"初めての体験ができて良かったです。" - user001</div>
+      <div class="voice-item">"商品の品質もよく使いやすかったです" - user002</div>
+      <div class="voice-item">"もう一度利用したいです。" - user003</div>
+    </div>
+  </section>
+
+  <!-- CTAセクション -->
+  <section class="cta">
+    <h2>行動喚起（CTA）セクション</h2>
+    <p>ユーザーへのメッセージをここに記述します。</p>
+    <button class="cta-button">登録はこちら</button>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <p>ロゴ</p>
+        <p>サイトの概要説明</p>
+      </div>
+      <div class="footer-menu">
+        <div>
+          <h4>フッターメニュー1</h4>
+          <ul><li><a href="#">リンク</a></li><li><a href="#">リンク</a></li></ul>
+        </div>
+        <div>
+          <h4>フッターメニュー2</h4>
+          <ul><li><a href="#">リンク</a></li><li><a href="#">リンク</a></li></ul>
+        </div>
+        <div>
+          <h4>フッターメニュー3</h4>
+          <ul><li><a href="#">リンク</a></li><li><a href="#">リンク</a></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">コピーライト表記</div>
+  </footer>
+
+  <!-- モーダル -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="close-modal" class="close">&times;</span>
+      <img id="modal-image" src="" alt="">
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+    </div>
+  </div>
+
+  <script src="article_card.js"></script>
+</body>
+</html>
