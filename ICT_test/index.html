@@ -87,9 +87,18 @@
       height: 100%;
       object-fit: cover; 
     }
+    /* 💡 追加: 特徴のタイトル (h3) のスタイル */
+    .feature-item h3 {
+      font-size: 1.6rem;
+      color: #268629; /* ロゴの緑色と統一 */
+      margin: 15px 0 5px; /* 上部と下部の余白調整 */
+    }
+    /* 💡 追加: 特徴の説明文 (p) のスタイル */
     .feature-item p {
-      margin-top: 10px;
-      font-weight: bold;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
     }
     
   </style>
@@ -127,28 +136,31 @@
         <div class="feature-image-container">
           <img src="image/touch.png" alt="特徴1のイメージ" class="feature-image">
         </div>
-        <p>竹に触れる<br>竹林所有者が竹林を体験の場として提供することで、利用者が楽しめるようなイベントを私たちが企画運営し多くの人に竹と触れ合う機会を提供します。</p>
+        <h3>竹に触れる</h3>
+        <p>竹林所有者が竹林を体験の場として提供することで、利用者が楽しめるようなイベントを私たちが企画運営し多くの人に竹と触れ合う機会を提供します。</p>
       </div>
       
       <div class="feature-item">
         <div class="feature-image-container">
           <img src="image/buy.png" alt="特徴2のイメージ" class="feature-image">
         </div>
-        <p>竹を買う・売る<br>伐採された竹や筍、クリエイターが製作した竹製品を利用者との間で売買できる場を提供します。</p>
+        <h3>竹を買う・売る</h3>
+        <p>伐採された竹や筍、クリエイターが製作した竹製品を利用者との間で売買できる場を提供します。</p>
       </div>
       
       <div class="feature-item">
         <div class="feature-image-container">
           <img src="image/com.png" alt="特徴3のイメージ" class="feature-image">
         </div>
-        <p>竹でつながる<br>体験レポートやレビュー、DIYのアイデアなどを共有できる機能を設け、ユーザー間で交流できる場を提供します。</p>
+        <h3>竹でつながる</h3>
+        <p>体験レポートやレビュー、DIYのアイデアなどを共有できる機能を設け、ユーザー間で交流できる場を提供します。</p>
       </div>
       
     </div>
   </section>
 
   <section class="recommendations">
-    <h2>おすすめの体験</h2>
+    <h2>おすすめの竹林体験・商品</h2>
     <div id="event-list" class="event-list">
       </div>
   </section>
@@ -156,9 +168,9 @@
   <section class="voices">
     <h2>お客様の声</h2>
     <div class="voice-list">
-      <div class="voice-item">"ここにコメントが入ります..." - 利用者名</div>
-      <div class="voice-item">"ここにコメントが入ります..." - 利用者名</div>
-      <div class="voice-item">"ここにコメントが入ります..." - 利用者名</div>
+      <div class="voice-item">"初めての体験ができて良かったです。" - user001</div>
+      <div class="voice-item">"商品の品質もよく使いやすかったです" - user002</div>
+      <div class="voice-item">"もう一度利用したいです。" - user003</div>
     </div>
   </section>
 
