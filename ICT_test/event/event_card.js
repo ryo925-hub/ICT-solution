@@ -1,24 +1,34 @@
 // イベントデータ
 const events = [
   {
-    title: "陶芸体験",
-    description: "自分だけのオリジナル陶器を作ろう！初心者でも安心のサポート付きです。",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTc5fDB8MXxzZWFyY2h8MTB8fGNvZGluZ3xlbnwwfHx8fDE3MjE4NzkzNjV8MA&ixlib=rb-4.0.3&q=&w=30"
+    title: "竹細工体験",
+    description: "熟練の職人が教える、本格的な竹細工体験。世界に一つだけのオリジナル作品を作ってみませんか？",
+    image: "/ICT_test/image/test.png"
   },
   {
-    title: "そば打ち体験",
-    description: "地元のそば粉を使って、香り高い手打ちそばを作ってみよう！",
-    image: "https://images.unsplash.com/photo-1582980495309-9b33ef39e0d6?auto=format&fit=crop&w=800&q=80"
+    title: "竹灯り体験",
+    description: "幻想的な竹灯りを作るワークショップ。竹に穴を開けて、美しい光のアートを創造します。",
+    image: "/ICT_test/image/taketomori.png"
   },
   {
-    title: "キャンドルづくり体験",
-    description: "好きな香りと色を選んで、世界にひとつだけのキャンドルを作りましょう。",
-    image: "https://images.unsplash.com/photo-1584714268709-9f8e30e6f5e1?auto=format&fit=crop&w=800&q=80"
+    title: "竹箸セット",
+    description: "しなやかで使いやすい竹箸の5膳セット。食卓に自然の温もりを添えます。",
+    image: "/ICT_test/image/chopsticks5.png"
   },
   {
-    title: "陶芸絵付け体験",
-    description: "完成済みの器に絵付けをして、自分だけの作品を作れます。",
-    image: "https://images.unsplash.com/photo-1602007775779-88082c7a35b1?auto=format&fit=crop&w=800&q=80"
+    title: "竹ランプ",
+    description: "お部屋を優しく照らす竹製のランプシェード。和室にも洋室にもマッチします。",
+    image: "/ICT_test/image/bamboo_lamp.png"
+  },
+  {
+    title: "竹茶体験",
+    description: "静かな茶室で、珍しい竹の葉のお茶を味わう体験。心落ち着くひとときを。",
+    image: "/ICT_test/image/take_cha.png"
+  },
+  {
+    title: "竹の弁当箱",
+    description: "お通気性が良く、ご飯が美味しいまま保たれる伝統的な竹製の弁当箱です。",
+    image: "/ICT_test/image/lunch_box.png"
   }
 ];
 
@@ -57,4 +67,5 @@ closeModal.addEventListener("click", () => {
 window.addEventListener("click", e => {
   if (e.target == modal) modal.style.display = "none";
 });
+
 
